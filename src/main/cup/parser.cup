@@ -3,60 +3,61 @@ import java_cup.runtime.*;
 
 class ParserSQL;
 
-terminal SIMBMENOR, SIMBMAYOR, SELECCIONAR, FILTRAR, INSERTAR, ACTUALIZAR, ASIGNAR, ELIMINAR, P_COMA, EN, PARENTESIS_ABRE;
+terminal SELECCIONAR, FILTRAR, INSERTAR, ACTUALIZAR, ASIGNAR, ELIMINAR, P_COMA, EN, PARENTESIS_ABRE;
 terminal PARENTESIS_CIERRA, COMA, VALORES, ASTERISCO, SIMB_IGUAL, SIMB_MENOR, SIMB_MAYOR,SIMB_MENOR_IGUAL, SIMB_MAYOR_IGUAL ;
 terminal SIMB_NO_IGUAL, OP_AND, OP_OR;
-terminal String PATH, NOMBRECOLUMNA, LITERAL;
+terminal String NOMBRECOLUMNA, LITERAL, NUMBER;
 
 non terminal instruccion, seleccionar, insertar, actualizar, eliminar, listado, tabla,valores, condiciones, condicion;
-non terminal asignaciones, asignacion, columnas, operacion_relacional, operador_relacional, operador_logico;
+non terminal asignaciones, asignacion, columnas, operacion_relacional, operador_relacional, operador_logico,literal, empty;
 
 
 
 
 start with instruccion;
 
-instruccion ::= seleccionar
-             | insertar
-             | actualizar
-             | eliminar
+instruccion ::= seleccionar {: System.out.println("Se encontro la instruccion seleccionar"); :}
+             | insertar {: System.out.println("Se encontro la instruccion insertar"); :}
+             | actualizar {: System.out.println("Se encontro la instruccion actualizar"); :}
+             | eliminar {: System.out.println("Se encontro la instruccion eliminar"); :}
              ;
 
-seleccionar ::= SELECCIONAR listado EN PATH condiciones P_COMA;
+seleccionar ::= SELECCIONAR listado EN LITERAL:p condiciones P_COMA {: System.out.println("Se encontro la instruccion seleccionar en "+p); :}
+            ;
 
-listado ::= ASTERISCO
-	| columnas
+listado ::= ASTERISCO {: System.out.println("Se encontro * "); :}
+	| columnas {: System.out.println("Se encontro la columna"); :}
         ;
 
-insertar ::= INSERTAR EN PATH PARENTESIS_ABRE tabla PARENTESIS_CIERRA VALORES PARENTESIS_ABRE valores PARENTESIS_CIERRA P_COMA;
+insertar ::= INSERTAR EN LITERAL tabla VALORES PARENTESIS_ABRE valores PARENTESIS_CIERRA P_COMA;
 
-tabla ::= columnas
+tabla ::= PARENTESIS_ABRE columnas PARENTESIS_CIERRA
 	| empty
         ;
 
-valores ::= LITERAL COMA valores
-	| LITERAL
+valores ::= literal COMA valores
+	| literal
         ;
 
-actualizar ::= ACTUALIZAR EN PATH ASIGNAR asignaciones condiciones P_COMA
+actualizar ::= ACTUALIZAR EN LITERAL ASIGNAR asignaciones condiciones P_COMA
              ;
 
 asignaciones ::= asignacion COMA asignaciones
               | asignacion
               ;
 
-asignacion ::= NOMBRECOLUMNA OPERADORIGUAL LITERAL
+asignacion ::= NOMBRECOLUMNA SIMB_IGUAL literal
             ;
 
-eliminar ::= ELIMINAR EN PATH condiciones P_COMA
+eliminar ::= ELIMINAR EN LITERAL condiciones P_COMA
             ;
 
-columnas ::= NOMBRECOLUMNA COMA columnas
-	|NOMBRECOLUMNA
+columnas ::= NOMBRECOLUMNA:c1 COMA columnas {: System.out.println("Se encontro la columna "+c1); :}
+	|NOMBRECOLUMNA:c2 {: System.out.println("Se encontro columna "+c2); :}
         ;
 
-condiciones ::= FILTRAR condicion
-		| empty
+condiciones ::= FILTRAR condicion {: System.out.println("filtramos"); :}
+		| empty {: System.out.println("no se encontro nada"); :}
                 ;
 
 condicion ::= operacion_relacional operador_logico condicion
@@ -65,7 +66,12 @@ condicion ::= operacion_relacional operador_logico condicion
 
            
 
-operacion_relacional ::= NOMBRECOLUMNA operador_relacional LITERAL;
+operacion_relacional ::= NOMBRECOLUMNA operador_relacional literal {: System.out.println("operacion relacional"); :}
+                    ;
+
+literal ::= LITERAL:l {: System.out.println("literal: "+l); :}
+            | NUMBER:n {: System.out.println("literal: "+n); :}
+            ;
 
 operador_relacional ::= SIMB_IGUAL
                    | SIMB_MENOR
@@ -78,3 +84,5 @@ operador_relacional ::= SIMB_IGUAL
 operador_logico ::= OP_AND
                 | OP_OR
                 ;
+
+empty ::= /* empty */ {: System.out.println("no se encontro nada"); :} ;

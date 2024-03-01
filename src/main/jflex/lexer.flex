@@ -25,30 +25,39 @@ import java_cup.runtime.*;
 
 number = [0-9]
 letter = [a-zA-Z]
-LITERAL = ({number}+|"\""[^"\n]*"\"")
+//LITERAL = ({number}+|\"[^\"]*\")
+//PATH = (\"[^\"]*\")
+LITERAL = (\"[^\"]*\")
 whitespace = [ \t\r]
 newline = [\n]
 
 %eofval{
-    return symbol(ParserIdeSym.EOF);
+    return symbol(ParserSQLSym.EOF);
 %eofval}
 
 
 %%
 
-<YYINITIAL> EN { return new Symbol(ParserSQLSym.EN); }
-<YYINITIAL> {LITERAL} EN { return new Symbol(ParserSQLSym.PATH, yytext()); }
 
+//<YYINITIAL> EN { return new Symbol(ParserSQLSym.EN); }
+//<YYINITIAL> {PATH} EN { return new Symbol(ParserSQLSym.PATH, yytext()); }
+"EN"                                      { return new Symbol(ParserSQLSym.EN); }
+//{PATH} { return new Symbol(ParserSQLSym.PATH, yytext()); }
 "SELECCIONAR"                           { return symbol(ParserSQLSym.SELECCIONAR); }
 "INSERTAR"                              { return symbol(ParserSQLSym.INSERTAR); }
 "ACTUALIZAR"                            { return symbol(ParserSQLSym.ACTUALIZAR); }
 "ELIMINAR"                              { return symbol(ParserSQLSym.ELIMINAR); }
 {LITERAL}                               { return symbol(ParserSQLSym.LITERAL, yytext()); }
-{FILTRAR}                               { return symbol(ParserSQLSym.FILTRAR }
+{number}+|{number}+"."{number}+         { return symbol(ParserSQLSym.NUMBER, yytext()); }
+"FILTRAR"                               { return symbol(ParserSQLSym.FILTRAR); }
+"VALORES"                               { return symbol(ParserSQLSym.VALORES); }
+"ASIGNAR"                               { return symbol(ParserSQLSym.ASIGNAR); }
 "AND"                                   { return symbol(ParserSQLSym.OP_AND); }
 "OR"                                    { return symbol(ParserSQLSym.OP_OR); }
 ({letter}|"_")({letter}|{number}|"_")*  { return symbol(ParserSQLSym.NOMBRECOLUMNA, yytext()); }
 "*"                                     { return symbol(ParserSQLSym.ASTERISCO); }
+"("                                     { return symbol(ParserSQLSym.PARENTESIS_ABRE); }
+")"                                     { return symbol(ParserSQLSym.PARENTESIS_CIERRA); }
 ","                                     { return symbol(ParserSQLSym.COMA); }
 ";"                                     { return symbol(ParserSQLSym.P_COMA); }
 "="                                     { return symbol(ParserSQLSym.SIMB_IGUAL); }
