@@ -1,0 +1,80 @@
+package com.rudyreyes.emuladorsql;
+import java_cup.runtime.*;
+
+class ParserSQL;
+
+terminal SIMBMENOR, SIMBMAYOR, SELECCIONAR, FILTRAR, INSERTAR, ACTUALIZAR, ASIGNAR, ELIMINAR, P_COMA, EN, PARENTESIS_ABRE;
+terminal PARENTESIS_CIERRA, COMA, VALORES, ASTERISCO, SIMB_IGUAL, SIMB_MENOR, SIMB_MAYOR,SIMB_MENOR_IGUAL, SIMB_MAYOR_IGUAL ;
+terminal SIMB_NO_IGUAL, OP_AND, OP_OR;
+terminal String PATH, NOMBRECOLUMNA, LITERAL;
+
+non terminal instruccion, seleccionar, insertar, actualizar, eliminar, listado, tabla,valores, condiciones, condicion;
+non terminal asignaciones, asignacion, columnas, operacion_relacional, operador_relacional, operador_logico;
+
+
+
+
+start with instruccion;
+
+instruccion ::= seleccionar
+             | insertar
+             | actualizar
+             | eliminar
+             ;
+
+seleccionar ::= SELECCIONAR listado EN PATH condiciones P_COMA;
+
+listado ::= ASTERISCO
+	| columnas
+        ;
+
+insertar ::= INSERTAR EN PATH PARENTESIS_ABRE tabla PARENTESIS_CIERRA VALORES PARENTESIS_ABRE valores PARENTESIS_CIERRA P_COMA;
+
+tabla ::= columnas
+	| empty
+        ;
+
+valores ::= LITERAL COMA valores
+	| LITERAL
+        ;
+
+actualizar ::= ACTUALIZAR EN PATH ASIGNAR asignaciones condiciones P_COMA
+             ;
+
+asignaciones ::= asignacion COMA asignaciones
+              | asignacion
+              ;
+
+asignacion ::= NOMBRECOLUMNA OPERADORIGUAL LITERAL
+            ;
+
+eliminar ::= ELIMINAR EN PATH condiciones P_COMA
+            ;
+
+columnas ::= NOMBRECOLUMNA COMA columnas
+	|NOMBRECOLUMNA
+        ;
+
+condiciones ::= FILTRAR condicion
+		| empty
+                ;
+
+condicion ::= operacion_relacional operador_logico condicion
+		| operacion_relacional
+                ;
+
+           
+
+operacion_relacional ::= NOMBRECOLUMNA operador_relacional LITERAL;
+
+operador_relacional ::= SIMB_IGUAL
+                   | SIMB_MENOR
+                   | SIMB_MAYOR
+                   | SIMB_MENOR_IGUAL
+                   | SIMB_MAYOR_IGUAL
+                   | SIMB_NO_IGUAL
+                   ;
+
+operador_logico ::= OP_AND
+                | OP_OR
+                ;
