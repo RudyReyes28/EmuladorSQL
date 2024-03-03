@@ -4,8 +4,9 @@
 
 package com.rudyreyes.emuladorsql;
 
-import com.rudyreyes.emuladorsql.modelo.InstruccionSeleccionar;
+import com.rudyreyes.emuladorsql.modelo.*;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java_cup.runtime.Symbol;
 
 /**
@@ -15,32 +16,54 @@ import java_cup.runtime.Symbol;
 public class EmuladorSQL {
 
     public static void main(String[] args) throws Exception {
-        String st =  "SELECCIONAR columna1 EN \"proyecto.archivo1\" ;";
-        //String st =  "SELECCIONAR columna1 , columna2 EN \"proyecto.archivo1\" FILTRAR columna1 = \"hola\" AND columna2 = 5 ;";
-        //String st = "INSERTAR EN \"proyecto.archivo1\" (columna1,columna2) VALORES (\"val1\",2);";
+        //String st =  "SELECCIONAR columna1, columna2, columna3 EN \"proyecto.archivo1\" ;";
+        String st1 =  "SELECCIONAR columna1 , columna2 EN \"proyecto.archivo1\" FILTRAR columna1 = \"hola\" AND columna2 = 5 AND columna2 > 5;";
+        String st = "INSERTAR EN \"proyecto.archivo1\" (columna1,columna2) VALORES (\"val1\",2);";
         //String st = "INSERTAR EN \"proyecto.archivo1\" VALORES (\"val1\",2);";
         //String st = "ACTUALIZAR EN \"proyecto.archivo1\" ASIGNAR columna1=\"Valor\",columna2=2 FILTRAR columna2=1 AND columna3>=5;";
         //String st = "ACTUALIZAR EN \"proyecto.archivo1\" ASIGNAR columna1=\"Valor\",columna2=2;";
         //String st = "ELIMINAR \n EN \"proyecto.archivo1\" \n ;";
-        LexerSQL lexer = new LexerSQL(new StringReader(st));
+        String todo = st1+"\n"+st;
+        LexerSQL lexer = new LexerSQL(new StringReader(todo));
         ParserSQL parser = new ParserSQL(lexer);
         
         
         try {
             Symbol symbol = parser.parse();
-            if (symbol.value instanceof InstruccionSeleccionar) {
+            ArrayList<Object> consultas = new ArrayList<>(parser.obtenerConsultas());
+            
+            for(Object objetos: consultas){
+                if (objetos instanceof InstruccionSeleccionar) {
+                    InstruccionSeleccionar seleccion = (InstruccionSeleccionar) objetos;
+                    if (seleccion != null) {
+                        System.out.println("Consultas para seleccionar :");
+                        seleccion.imprimirDatos();
+                    }
+                } else if (objetos instanceof InstruccionInsertar) {
+                    InstruccionInsertar insertar = (InstruccionInsertar) objetos;
+                    if (insertar != null) {
+                        System.out.println("\nConsultas para insertar: ");
+                        insertar.mostrarDatos();
+                    }
+
+                } else {
+                    System.out.println("No es instancia");
+                }
+            }
+            /*if (symbol.value instanceof InstruccionSeleccionar) {
                 InstruccionSeleccionar seleccion = (InstruccionSeleccionar) symbol.value;
                 if (seleccion != null) {
-                // Hacer algo con el objeto resultado...
-                System.out.println("Se encontró una instrucción seleccionar");
-                System.out.println("Path: " + seleccion.getPath());
-                //System.out.println("Columnas: " + seleccion.getColumnas().get(0));
-                //System.out.println("Condiciones: " + resultado.getCondiciones());
-                // ...otros métodos y propiedades según tu implementación...
+                    seleccion.imprimirDatos();
                 }
+            }else if(symbol.value instanceof InstruccionInsertar){
+                InstruccionInsertar insertar = (InstruccionInsertar) symbol.value;
+                if(insertar != null){
+                    insertar.mostrarDatos();
+                }
+            
             }else{
                 System.out.println("No es instancia");
-            }
+            }*/
             
             
         } catch (Exception e) {

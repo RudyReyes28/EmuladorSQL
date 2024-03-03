@@ -6,72 +6,86 @@ import com.rudyreyes.emuladorsql.modelo.*;
 class ParserSQL;
 
 parser code {:
-    String asterisco = "*";
+    String asterisco = "";
     ArrayList<String> columnas = new ArrayList<>();
     ArrayList<Columna> condiciones = new ArrayList<>();
     ArrayList<String> operadoresLogicos = new ArrayList<>();
-
+    ArrayList<String> valoresInsertar = new ArrayList<>();
+    ArrayList<Object> consultas = new ArrayList<>();
     
     void limpiarEstructuras() {
         columnas.clear();
         condiciones.clear();
         operadoresLogicos.clear();
+        valoresInsertar.clear();
+        consultas.clear();
+        asterisco = "";
         
     }
+
+    ArrayList<Object> obtenerConsultas(){
+        return consultas;
+    }
 :}
-/*
-init with {: InstruccionSeleccionar seleccionar = new InstruccionSeleccionar(); 
-            ArrayList<String> columnas = new ArrayList<>();
-            ArrayList<Columna> condiciones  = new ArrayList<>();
-            ArrayList<String> operadoresLogicos = new ArrayList<>();
-            String asterisco = "";
-        :};
-*/
+
 
 terminal SELECCIONAR, FILTRAR, INSERTAR, ACTUALIZAR, ASIGNAR, ELIMINAR, P_COMA, EN, PARENTESIS_ABRE;
 terminal PARENTESIS_CIERRA, COMA, VALORES, ASTERISCO, SIMB_IGUAL, SIMB_MENOR, SIMB_MAYOR,SIMB_MENOR_IGUAL, SIMB_MAYOR_IGUAL ;
 terminal SIMB_NO_IGUAL, OP_AND, OP_OR;
 terminal String NOMBRECOLUMNA, LITERAL, NUMBER;
 
-non terminal instruccion, insertar, actualizar, eliminar, listado, tabla,valores, condiciones, condicion;
-non terminal asignaciones, asignacion, columnas, operacion_relacional, operador_logico,literal, empty;
+non terminal listas_instrucciones, instruccion, actualizar, eliminar, listado, tabla,valores, condiciones, condicion;
+non terminal asignaciones, asignacion, columnas, operacion_relacional, operador_logico, empty;
 
-non terminal String operador_relacional;
+non terminal String operador_relacional, literal;
 non terminal InstruccionSeleccionar seleccionar;
+non terminal InstruccionInsertar insertar;
 
+start with listas_instrucciones;
 
-start with instruccion;
+listas_instrucciones ::= instruccion:i listas_instrucciones {: consultas.add(i); :}
+                    | instruccion:i {: consultas.add(i); :}
+                    ;
 
 instruccion ::= seleccionar:s {:RESULT = s; :}
-             | insertar {: System.out.println("Se encontro la instruccion insertar"); :}
+             | insertar:i {:RESULT = i; :}
              | actualizar {: System.out.println("Se encontro la instruccion actualizar"); :}
              | eliminar {: System.out.println("Se encontro la instruccion eliminar"); :}
              ;
 
 seleccionar ::= SELECCIONAR listado EN LITERAL:p condiciones P_COMA {: 
-    System.out.println("Se encontro la instruccion seleccionar");
-    
-    //InstruccionSeleccionar seleccion = new InstruccionSeleccionar(asterisco, columnas, p,condiciones,operadoresLogicos);
-    
-    RESULT = new InstruccionSeleccionar(asterisco, columnas, p, condiciones, operadoresLogicos);;
-    
+    ArrayList<String> columnasCopia = new ArrayList<>(columnas);
+    ArrayList<Columna> condicionesCopia = new ArrayList<>(condiciones);
+    ArrayList<String> operadoresLogicosCopia = new ArrayList<>(operadoresLogicos);
+
+    RESULT = new InstruccionSeleccionar(asterisco, columnasCopia, p, condicionesCopia, operadoresLogicosCopia);
+
     limpiarEstructuras();
    
-:}
+    :}
             ;
 
 listado ::= ASTERISCO {: asterisco = "*"; :}
 	| columnas
         ;
 
-insertar ::= INSERTAR EN LITERAL tabla VALORES PARENTESIS_ABRE valores PARENTESIS_CIERRA P_COMA;
+insertar ::= INSERTAR EN LITERAL:p tabla VALORES PARENTESIS_ABRE valores PARENTESIS_CIERRA P_COMA
+        {: 
+        ArrayList<String> columnasCopia = new ArrayList<>(columnas);
+         ArrayList<String> valoresCopia = new ArrayList<>(valoresInsertar);
+         
+        RESULT = new InstruccionInsertar(p, columnasCopia, valoresCopia);
+
+        limpiarEstructuras();
+        :}
+        ;
 
 tabla ::= PARENTESIS_ABRE columnas PARENTESIS_CIERRA
 	| empty
         ;
 
-valores ::= literal COMA valores
-	| literal
+valores ::= literal:li COMA valores {:valoresInsertar.add(li);:}
+	| literal:li2 {:valoresInsertar.add(li2);:}
         ;
 
 actualizar ::= ACTUALIZAR EN LITERAL ASIGNAR asignaciones condiciones P_COMA
@@ -123,21 +137,21 @@ operacion_relacional ::= NOMBRECOLUMNA:c operador_relacional:o literal:li {:
             operador = "<>";
             break;
     }
-    String valorLiteral = li.toString();
-    condiciones.add(new Columna(c, o , valorLiteral)); 
+    
+    condiciones.add(new Columna(c, o , li)); 
 :}
                     ;
 
-literal ::= LITERAL:l
-            | NUMBER:n 
+literal ::= LITERAL:l {:RESULT = l; :}
+            | NUMBER:n {:RESULT = n; :}
             ;
 
-operador_relacional ::= SIMB_IGUAL:igual {:RESULT = "igual";:}
-                   | SIMB_MENOR:menor {:RESULT = "menor";:}
-                   | SIMB_MAYOR:mayor {:RESULT = "mayor";:}
-                   | SIMB_MENOR_IGUAL:meigual {:RESULT = "meigual";:}
-                   | SIMB_MAYOR_IGUAL:maigual {:RESULT = "maigual";:}
-                   | SIMB_NO_IGUAL:noigual {:RESULT = "noigual";:}
+operador_relacional ::= SIMB_IGUAL:igual {:RESULT = "=";:}
+                   | SIMB_MENOR:menor {:RESULT = "<";:}
+                   | SIMB_MAYOR:mayor {:RESULT = ">";:}
+                   | SIMB_MENOR_IGUAL:meigual {:RESULT = "<=";:}
+                   | SIMB_MAYOR_IGUAL:maigual {:RESULT = ">=";:}
+                   | SIMB_NO_IGUAL:noigual {:RESULT = "<>";:}
                    ;
 
 operador_logico ::= OP_AND {: operadoresLogicos.add("AND"); :}

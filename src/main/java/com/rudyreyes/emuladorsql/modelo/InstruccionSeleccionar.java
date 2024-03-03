@@ -94,5 +94,34 @@ public class InstruccionSeleccionar {
         this.path = path;
     }
     
+    public void imprimirDatos(){
+        System.out.println("Columnas a mostrar: ");
+        if(seleccionarTodo == "*"){
+            System.out.println("Columnas: *");
+        }else{
+            if(columnas!=null){
+                for (String elemento : columnas) {
+                    System.out.println("Columna: "+elemento);
+                }   
+            }
+        }
+        
+        System.out.println("Direccion: "+this.path);
+        System.out.println("\nCondiciones si hay: ");
+        if(condiciones!=null){
+            for(Columna condicion: condiciones){
+                System.out.println("Columna: "+condicion.getColumna()+" "+condicion.getOperador()+" "+condicion.getValor());
+            }
+        }
+        
+        System.out.println("Operadores logicos: ");
+        if(operadoresLogicos != null){
+            for(String operador: operadoresLogicos){
+                System.out.println("Operador: "+operador);
+            }
+        }
+        
+    }
+    
     
 }

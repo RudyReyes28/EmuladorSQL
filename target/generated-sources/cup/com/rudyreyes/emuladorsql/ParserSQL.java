@@ -33,18 +33,18 @@ public class ParserSQL extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\044\000\002\002\004\000\002\002\003\000\002\002" +
-    "\003\000\002\002\003\000\002\002\003\000\002\023\010" +
-    "\000\002\006\003\000\002\006\003\000\002\003\013\000" +
-    "\002\007\005\000\002\007\003\000\002\010\005\000\002" +
-    "\010\003\000\002\004\011\000\002\013\005\000\002\013" +
-    "\003\000\002\014\005\000\002\005\007\000\002\015\005" +
-    "\000\002\015\003\000\002\011\004\000\002\011\003\000" +
-    "\002\012\005\000\002\012\003\000\002\016\005\000\002" +
-    "\020\003\000\002\020\003\000\002\022\003\000\002\022" +
-    "\003\000\002\022\003\000\002\022\003\000\002\022\003" +
-    "\000\002\022\003\000\002\017\003\000\002\017\003\000" +
-    "\002\021\002" });
+    "\000\046\000\002\002\004\000\002\002\004\000\002\002" +
+    "\003\000\002\003\003\000\002\003\003\000\002\003\003" +
+    "\000\002\003\003\000\002\023\010\000\002\006\003\000" +
+    "\002\006\003\000\002\024\013\000\002\007\005\000\002" +
+    "\007\003\000\002\010\005\000\002\010\003\000\002\004" +
+    "\011\000\002\013\005\000\002\013\003\000\002\014\005" +
+    "\000\002\005\007\000\002\015\005\000\002\015\003\000" +
+    "\002\011\004\000\002\011\003\000\002\012\005\000\002" +
+    "\012\003\000\002\016\005\000\002\022\003\000\002\022" +
+    "\003\000\002\021\003\000\002\021\003\000\002\021\003" +
+    "\000\002\021\003\000\002\021\003\000\002\021\003\000" +
+    "\002\017\003\000\002\017\003\000\002\020\002" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -52,47 +52,53 @@ public class ParserSQL extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\107\000\012\004\014\006\012\007\010\011\011\001" +
-    "\002\000\004\002\000\001\002\000\004\002\ufffe\001\002" +
-    "\000\004\002\ufffd\001\002\000\004\002\uffff\001\002\000" +
-    "\004\013\076\001\002\000\004\013\072\001\002\000\004" +
-    "\013\053\001\002\000\004\002\052\001\002\000\006\020" +
-    "\015\031\020\001\002\000\004\013\ufffb\001\002\000\004" +
-    "\013\023\001\002\000\004\013\ufffa\001\002\000\010\013" +
-    "\uffee\015\uffee\016\021\001\002\000\004\031\020\001\002" +
-    "\000\006\013\uffef\015\uffef\001\002\000\004\032\024\001" +
-    "\002\000\006\005\025\012\uffde\001\002\000\004\031\033" +
-    "\001\002\000\004\012\uffec\001\002\000\004\012\030\001" +
-    "\002\000\004\002\ufffc\001\002\000\010\012\uffea\027\046" +
-    "\030\050\001\002\000\004\012\uffed\001\002\000\016\021" +
-    "\042\022\034\023\035\024\036\025\040\026\041\001\002" +
-    "\000\006\032\uffe5\033\uffe5\001\002\000\006\032\uffe4\033" +
-    "\uffe4\001\002\000\006\032\uffe3\033\uffe3\001\002\000\006" +
-    "\032\043\033\044\001\002\000\006\032\uffe2\033\uffe2\001" +
-    "\002\000\006\032\uffe1\033\uffe1\001\002\000\006\032\uffe6" +
-    "\033\uffe6\001\002\000\016\005\uffe8\012\uffe8\015\uffe8\016" +
-    "\uffe8\027\uffe8\030\uffe8\001\002\000\016\005\uffe7\012\uffe7" +
-    "\015\uffe7\016\uffe7\027\uffe7\030\uffe7\001\002\000\010\012" +
-    "\uffe9\027\uffe9\030\uffe9\001\002\000\004\031\uffe0\001\002" +
-    "\000\004\031\033\001\002\000\004\031\uffdf\001\002\000" +
-    "\004\012\uffeb\001\002\000\004\002\001\001\002\000\004" +
-    "\032\054\001\002\000\006\014\056\017\uffde\001\002\000" +
-    "\004\017\ufff7\001\002\000\004\031\020\001\002\000\004" +
-    "\017\060\001\002\000\004\014\061\001\002\000\006\032" +
-    "\043\033\044\001\002\000\006\015\ufff5\016\066\001\002" +
-    "\000\004\015\064\001\002\000\004\012\065\001\002\000" +
-    "\004\002\ufff9\001\002\000\006\032\043\033\044\001\002" +
-    "\000\004\015\ufff6\001\002\000\004\015\071\001\002\000" +
-    "\004\017\ufff8\001\002\000\004\032\073\001\002\000\006" +
-    "\005\025\012\uffde\001\002\000\004\012\075\001\002\000" +
-    "\004\002\ufff0\001\002\000\004\032\077\001\002\000\004" +
-    "\010\100\001\002\000\004\031\101\001\002\000\004\021" +
-    "\110\001\002\000\006\005\025\012\uffde\001\002\000\010" +
-    "\005\ufff2\012\ufff2\016\104\001\002\000\004\031\101\001" +
-    "\002\000\006\005\ufff3\012\ufff3\001\002\000\004\012\107" +
-    "\001\002\000\004\002\ufff4\001\002\000\006\032\043\033" +
-    "\044\001\002\000\010\005\ufff1\012\ufff1\016\ufff1\001\002" +
-    "" });
+    "\000\111\000\012\004\015\006\012\007\010\011\011\001" +
+    "\002\000\014\002\ufffe\004\ufffe\006\ufffe\007\ufffe\011\ufffe" +
+    "\001\002\000\014\002\ufffc\004\ufffc\006\ufffc\007\ufffc\011" +
+    "\ufffc\001\002\000\014\002\ufffb\004\ufffb\006\ufffb\007\ufffb" +
+    "\011\ufffb\001\002\000\014\002\ufffd\004\ufffd\006\ufffd\007" +
+    "\ufffd\011\ufffd\001\002\000\004\013\100\001\002\000\004" +
+    "\013\074\001\002\000\004\013\055\001\002\000\004\002" +
+    "\054\001\002\000\014\002\uffff\004\015\006\012\007\010" +
+    "\011\011\001\002\000\006\020\016\031\021\001\002\000" +
+    "\004\013\ufff9\001\002\000\004\013\024\001\002\000\004" +
+    "\013\ufff8\001\002\000\010\013\uffec\015\uffec\016\022\001" +
+    "\002\000\004\031\021\001\002\000\006\013\uffed\015\uffed" +
+    "\001\002\000\004\032\025\001\002\000\006\005\026\012" +
+    "\uffdc\001\002\000\004\031\034\001\002\000\004\012\uffea" +
+    "\001\002\000\004\012\031\001\002\000\014\002\ufffa\004" +
+    "\ufffa\006\ufffa\007\ufffa\011\ufffa\001\002\000\010\012\uffe8" +
+    "\027\047\030\051\001\002\000\004\012\uffeb\001\002\000" +
+    "\016\021\043\022\035\023\036\024\037\025\041\026\042" +
+    "\001\002\000\006\032\uffe3\033\uffe3\001\002\000\006\032" +
+    "\uffe2\033\uffe2\001\002\000\006\032\uffe1\033\uffe1\001\002" +
+    "\000\006\032\044\033\045\001\002\000\006\032\uffe0\033" +
+    "\uffe0\001\002\000\006\032\uffdf\033\uffdf\001\002\000\006" +
+    "\032\uffe4\033\uffe4\001\002\000\016\005\uffe6\012\uffe6\015" +
+    "\uffe6\016\uffe6\027\uffe6\030\uffe6\001\002\000\016\005\uffe5" +
+    "\012\uffe5\015\uffe5\016\uffe5\027\uffe5\030\uffe5\001\002\000" +
+    "\010\012\uffe7\027\uffe7\030\uffe7\001\002\000\004\031\uffde" +
+    "\001\002\000\004\031\034\001\002\000\004\031\uffdd\001" +
+    "\002\000\004\012\uffe9\001\002\000\004\002\000\001\002" +
+    "\000\004\002\001\001\002\000\004\032\056\001\002\000" +
+    "\006\014\060\017\uffdc\001\002\000\004\017\ufff5\001\002" +
+    "\000\004\031\021\001\002\000\004\017\062\001\002\000" +
+    "\004\014\063\001\002\000\006\032\044\033\045\001\002" +
+    "\000\006\015\ufff3\016\070\001\002\000\004\015\066\001" +
+    "\002\000\004\012\067\001\002\000\014\002\ufff7\004\ufff7" +
+    "\006\ufff7\007\ufff7\011\ufff7\001\002\000\006\032\044\033" +
+    "\045\001\002\000\004\015\ufff4\001\002\000\004\015\073" +
+    "\001\002\000\004\017\ufff6\001\002\000\004\032\075\001" +
+    "\002\000\006\005\026\012\uffdc\001\002\000\004\012\077" +
+    "\001\002\000\014\002\uffee\004\uffee\006\uffee\007\uffee\011" +
+    "\uffee\001\002\000\004\032\101\001\002\000\004\010\102" +
+    "\001\002\000\004\031\103\001\002\000\004\021\112\001" +
+    "\002\000\006\005\026\012\uffdc\001\002\000\010\005\ufff0" +
+    "\012\ufff0\016\106\001\002\000\004\031\103\001\002\000" +
+    "\006\005\ufff1\012\ufff1\001\002\000\004\012\111\001\002" +
+    "\000\014\002\ufff2\004\ufff2\006\ufff2\007\ufff2\011\ufff2\001" +
+    "\002\000\006\032\044\033\045\001\002\000\010\005\uffef" +
+    "\012\uffef\016\uffef\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -100,34 +106,35 @@ public class ParserSQL extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\107\000\014\002\012\003\006\004\004\005\005\023" +
-    "\003\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\000\111\000\016\002\012\003\013\004\004\005\005\023" +
+    "\003\024\006\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\016" +
+    "\002\052\003\013\004\004\005\005\023\003\024\006\001" +
+    "\001\000\006\006\016\015\017\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\004\015\022\001\001\000\002\001\001\000\002\001\001" +
+    "\000\006\011\027\020\026\001\001\000\006\012\032\016" +
+    "\031\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\004\017\047\001\001\000\002\001\001\000" +
+    "\004\021\037\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\004\022\045\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\006\012\051\016\031\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\006\006\015" +
-    "\015\016\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\015\021\001\001" +
-    "\000\002\001\001\000\002\001\001\000\006\011\026\021" +
-    "\025\001\001\000\006\012\031\016\030\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\004\017" +
-    "\046\001\001\000\002\001\001\000\004\022\036\001\001" +
+    "\001\000\006\007\060\020\056\001\001\000\002\001\001" +
+    "\000\004\015\071\001\001\000\002\001\001\000\002\001" +
+    "\001\000\006\010\064\022\063\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\020\044\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\006\012\050\016\030" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\006\007\056\021\054\001\001" +
-    "\000\002\001\001\000\004\015\067\001\001\000\002\001" +
-    "\001\000\002\001\001\000\006\010\062\020\061\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\006\010\066\020\061\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\006\011\073\021\025\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\006\013\101\014\102\001\001\000\002\001\001\000\006" +
-    "\011\105\021\025\001\001\000\002\001\001\000\006\013" +
-    "\104\014\102\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\020\110\001\001\000\002\001" +
-    "\001" });
+    "\006\010\070\022\063\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\006\011" +
+    "\075\020\026\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\006\013\103\014" +
+    "\104\001\001\000\002\001\001\000\006\011\107\020\026" +
+    "\001\001\000\002\001\001\000\006\013\106\014\104\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\022\112\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -166,17 +173,25 @@ public class ParserSQL extends java_cup.runtime.lr_parser {
 
 
 
-    String asterisco = "*";
+    String asterisco = "";
     ArrayList<String> columnas = new ArrayList<>();
     ArrayList<Columna> condiciones = new ArrayList<>();
     ArrayList<String> operadoresLogicos = new ArrayList<>();
-
+    ArrayList<String> valoresInsertar = new ArrayList<>();
+    ArrayList<Object> consultas = new ArrayList<>();
     
     void limpiarEstructuras() {
         columnas.clear();
         condiciones.clear();
         operadoresLogicos.clear();
+        valoresInsertar.clear();
+        consultas.clear();
+        asterisco = "";
         
+    }
+
+    ArrayList<Object> obtenerConsultas(){
+        return consultas;
     }
 
 
@@ -205,7 +220,7 @@ class CUP$ParserSQL$actions {
       switch (CUP$ParserSQL$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // $START ::= instruccion EOF 
+          case 0: // $START ::= listas_instrucciones EOF 
             {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-1)).left;
@@ -219,67 +234,94 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // instruccion ::= seleccionar 
+          case 1: // listas_instrucciones ::= instruccion listas_instrucciones 
+            {
+              Object RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-1)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-1)).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-1)).value;
+		 consultas.add(i); 
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("listas_instrucciones",0, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-1)), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 2: // listas_instrucciones ::= instruccion 
+            {
+              Object RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
+		 consultas.add(i); 
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("listas_instrucciones",0, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 3: // instruccion ::= seleccionar 
             {
               Object RESULT =null;
 		int sleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
 		InstruccionSeleccionar s = (InstruccionSeleccionar)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
 		RESULT = s; 
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("instruccion",0, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("instruccion",1, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // instruccion ::= insertar 
+          case 4: // instruccion ::= insertar 
             {
               Object RESULT =null;
-		 System.out.println("Se encontro la instruccion insertar"); 
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("instruccion",0, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+		int ileft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
+		InstruccionInsertar i = (InstruccionInsertar)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
+		RESULT = i; 
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("instruccion",1, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // instruccion ::= actualizar 
+          case 5: // instruccion ::= actualizar 
             {
               Object RESULT =null;
 		 System.out.println("Se encontro la instruccion actualizar"); 
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("instruccion",0, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("instruccion",1, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // instruccion ::= eliminar 
+          case 6: // instruccion ::= eliminar 
             {
               Object RESULT =null;
 		 System.out.println("Se encontro la instruccion eliminar"); 
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("instruccion",0, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("instruccion",1, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // seleccionar ::= SELECCIONAR listado EN LITERAL condiciones P_COMA 
+          case 7: // seleccionar ::= SELECCIONAR listado EN LITERAL condiciones P_COMA 
             {
               InstruccionSeleccionar RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).right;
 		String p = (String)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).value;
 		 
-    System.out.println("Se encontro la instruccion seleccionar");
-    
-    //InstruccionSeleccionar seleccion = new InstruccionSeleccionar(asterisco, columnas, p,condiciones,operadoresLogicos);
-    
-    RESULT = new InstruccionSeleccionar(asterisco, columnas, p, condiciones, operadoresLogicos);;
-    
+    ArrayList<String> columnasCopia = new ArrayList<>(columnas);
+    ArrayList<Columna> condicionesCopia = new ArrayList<>(condiciones);
+    ArrayList<String> operadoresLogicosCopia = new ArrayList<>(operadoresLogicos);
+
+    RESULT = new InstruccionSeleccionar(asterisco, columnasCopia, p, condicionesCopia, operadoresLogicosCopia);
+
     limpiarEstructuras();
    
-
+    
               CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("seleccionar",17, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-5)), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // listado ::= ASTERISCO 
+          case 8: // listado ::= ASTERISCO 
             {
               Object RESULT =null;
 		 asterisco = "*"; 
@@ -288,7 +330,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // listado ::= columnas 
+          case 9: // listado ::= columnas 
             {
               Object RESULT =null;
 
@@ -297,16 +339,26 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // insertar ::= INSERTAR EN LITERAL tabla VALORES PARENTESIS_ABRE valores PARENTESIS_CIERRA P_COMA 
+          case 10: // insertar ::= INSERTAR EN LITERAL tabla VALORES PARENTESIS_ABRE valores PARENTESIS_CIERRA P_COMA 
             {
-              Object RESULT =null;
+              InstruccionInsertar RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-6)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-6)).right;
+		String p = (String)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-6)).value;
+		 
+        ArrayList<String> columnasCopia = new ArrayList<>(columnas);
+         ArrayList<String> valoresCopia = new ArrayList<>(valoresInsertar);
+         
+        RESULT = new InstruccionInsertar(p, columnasCopia, valoresCopia);
 
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("insertar",1, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-8)), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+        limpiarEstructuras();
+        
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("insertar",18, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-8)), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // tabla ::= PARENTESIS_ABRE columnas PARENTESIS_CIERRA 
+          case 11: // tabla ::= PARENTESIS_ABRE columnas PARENTESIS_CIERRA 
             {
               Object RESULT =null;
 
@@ -315,7 +367,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // tabla ::= empty 
+          case 12: // tabla ::= empty 
             {
               Object RESULT =null;
 
@@ -324,25 +376,31 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // valores ::= literal COMA valores 
+          case 13: // valores ::= literal COMA valores 
             {
               Object RESULT =null;
-
+		int lileft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).left;
+		int liright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).right;
+		String li = (String)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).value;
+		valoresInsertar.add(li);
               CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("valores",6, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // valores ::= literal 
+          case 14: // valores ::= literal 
             {
               Object RESULT =null;
-
+		int li2left = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
+		int li2right = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
+		String li2 = (String)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
+		valoresInsertar.add(li2);
               CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("valores",6, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // actualizar ::= ACTUALIZAR EN LITERAL ASIGNAR asignaciones condiciones P_COMA 
+          case 15: // actualizar ::= ACTUALIZAR EN LITERAL ASIGNAR asignaciones condiciones P_COMA 
             {
               Object RESULT =null;
 
@@ -351,7 +409,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // asignaciones ::= asignacion COMA asignaciones 
+          case 16: // asignaciones ::= asignacion COMA asignaciones 
             {
               Object RESULT =null;
 
@@ -360,7 +418,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // asignaciones ::= asignacion 
+          case 17: // asignaciones ::= asignacion 
             {
               Object RESULT =null;
 
@@ -369,7 +427,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // asignacion ::= NOMBRECOLUMNA SIMB_IGUAL literal 
+          case 18: // asignacion ::= NOMBRECOLUMNA SIMB_IGUAL literal 
             {
               Object RESULT =null;
 
@@ -378,7 +436,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // eliminar ::= ELIMINAR EN LITERAL condiciones P_COMA 
+          case 19: // eliminar ::= ELIMINAR EN LITERAL condiciones P_COMA 
             {
               Object RESULT =null;
 
@@ -387,7 +445,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // columnas ::= NOMBRECOLUMNA COMA columnas 
+          case 20: // columnas ::= NOMBRECOLUMNA COMA columnas 
             {
               Object RESULT =null;
 		int c1left = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).left;
@@ -399,7 +457,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // columnas ::= NOMBRECOLUMNA 
+          case 21: // columnas ::= NOMBRECOLUMNA 
             {
               Object RESULT =null;
 		int c2left = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -411,7 +469,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // condiciones ::= FILTRAR condicion 
+          case 22: // condiciones ::= FILTRAR condicion 
             {
               Object RESULT =null;
 
@@ -420,7 +478,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // condiciones ::= empty 
+          case 23: // condiciones ::= empty 
             {
               Object RESULT =null;
 		 System.out.println("no se encontro nada"); 
@@ -429,7 +487,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // condicion ::= operacion_relacional operador_logico condicion 
+          case 24: // condicion ::= operacion_relacional operador_logico condicion 
             {
               Object RESULT =null;
 
@@ -438,7 +496,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // condicion ::= operacion_relacional 
+          case 25: // condicion ::= operacion_relacional 
             {
               Object RESULT =null;
 
@@ -447,7 +505,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // operacion_relacional ::= NOMBRECOLUMNA operador_relacional literal 
+          case 26: // operacion_relacional ::= NOMBRECOLUMNA operador_relacional literal 
             {
               Object RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).left;
@@ -458,7 +516,7 @@ class CUP$ParserSQL$actions {
 		String o = (String)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-1)).value;
 		int lileft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
 		int liright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
-		Object li = (Object)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
+		String li = (String)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
 		
     String operador = "";
     switch(o) {
@@ -481,111 +539,111 @@ class CUP$ParserSQL$actions {
             operador = "<>";
             break;
     }
-    String valorLiteral = li.toString();
-    condiciones.add(new Columna(c, o , valorLiteral)); 
+    
+    condiciones.add(new Columna(c, o , li)); 
 
               CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operacion_relacional",12, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // literal ::= LITERAL 
+          case 27: // literal ::= LITERAL 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		int lleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
 		int lright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
 		String l = (String)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
-
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("literal",14, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+		RESULT = l; 
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("literal",16, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // literal ::= NUMBER 
+          case 28: // literal ::= NUMBER 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
 		String n = (String)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
-
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("literal",14, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+		RESULT = n; 
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("literal",16, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // operador_relacional ::= SIMB_IGUAL 
+          case 29: // operador_relacional ::= SIMB_IGUAL 
             {
               String RESULT =null;
 		int igualleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
 		int igualright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
 		Object igual = (Object)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
-		RESULT = "igual";
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",16, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+		RESULT = "=";
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",15, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // operador_relacional ::= SIMB_MENOR 
+          case 30: // operador_relacional ::= SIMB_MENOR 
             {
               String RESULT =null;
 		int menorleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
 		int menorright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
 		Object menor = (Object)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
-		RESULT = "menor";
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",16, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+		RESULT = "<";
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",15, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // operador_relacional ::= SIMB_MAYOR 
+          case 31: // operador_relacional ::= SIMB_MAYOR 
             {
               String RESULT =null;
 		int mayorleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
 		int mayorright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
 		Object mayor = (Object)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
-		RESULT = "mayor";
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",16, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+		RESULT = ">";
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",15, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // operador_relacional ::= SIMB_MENOR_IGUAL 
+          case 32: // operador_relacional ::= SIMB_MENOR_IGUAL 
             {
               String RESULT =null;
 		int meigualleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
 		int meigualright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
 		Object meigual = (Object)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
-		RESULT = "meigual";
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",16, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+		RESULT = "<=";
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",15, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // operador_relacional ::= SIMB_MAYOR_IGUAL 
+          case 33: // operador_relacional ::= SIMB_MAYOR_IGUAL 
             {
               String RESULT =null;
 		int maigualleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
 		int maigualright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
 		Object maigual = (Object)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
-		RESULT = "maigual";
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",16, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+		RESULT = ">=";
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",15, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 32: // operador_relacional ::= SIMB_NO_IGUAL 
+          case 34: // operador_relacional ::= SIMB_NO_IGUAL 
             {
               String RESULT =null;
 		int noigualleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
 		int noigualright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
 		Object noigual = (Object)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
-		RESULT = "noigual";
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",16, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+		RESULT = "<>";
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",15, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 33: // operador_logico ::= OP_AND 
+          case 35: // operador_logico ::= OP_AND 
             {
               Object RESULT =null;
 		 operadoresLogicos.add("AND"); 
@@ -594,7 +652,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 34: // operador_logico ::= OP_OR 
+          case 36: // operador_logico ::= OP_OR 
             {
               Object RESULT =null;
 		 operadoresLogicos.add("OR"); 
@@ -603,11 +661,11 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 35: // empty ::= 
+          case 37: // empty ::= 
             {
               Object RESULT =null;
 		 System.out.println("no se encontro nada"); 
-              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("empty",15, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("empty",14, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;
 
