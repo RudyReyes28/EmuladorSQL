@@ -1,32 +1,67 @@
 package com.rudyreyes.emuladorsql;
+import java.util.ArrayList;
 import java_cup.runtime.*;
+import com.rudyreyes.emuladorsql.modelo.*;
 
 class ParserSQL;
+
+parser code {:
+    String asterisco = "*";
+    ArrayList<String> columnas = new ArrayList<>();
+    ArrayList<Columna> condiciones = new ArrayList<>();
+    ArrayList<String> operadoresLogicos = new ArrayList<>();
+
+    
+    void limpiarEstructuras() {
+        columnas.clear();
+        condiciones.clear();
+        operadoresLogicos.clear();
+        
+    }
+:}
+/*
+init with {: InstruccionSeleccionar seleccionar = new InstruccionSeleccionar(); 
+            ArrayList<String> columnas = new ArrayList<>();
+            ArrayList<Columna> condiciones  = new ArrayList<>();
+            ArrayList<String> operadoresLogicos = new ArrayList<>();
+            String asterisco = "";
+        :};
+*/
 
 terminal SELECCIONAR, FILTRAR, INSERTAR, ACTUALIZAR, ASIGNAR, ELIMINAR, P_COMA, EN, PARENTESIS_ABRE;
 terminal PARENTESIS_CIERRA, COMA, VALORES, ASTERISCO, SIMB_IGUAL, SIMB_MENOR, SIMB_MAYOR,SIMB_MENOR_IGUAL, SIMB_MAYOR_IGUAL ;
 terminal SIMB_NO_IGUAL, OP_AND, OP_OR;
 terminal String NOMBRECOLUMNA, LITERAL, NUMBER;
 
-non terminal instruccion, seleccionar, insertar, actualizar, eliminar, listado, tabla,valores, condiciones, condicion;
-non terminal asignaciones, asignacion, columnas, operacion_relacional, operador_relacional, operador_logico,literal, empty;
+non terminal instruccion, insertar, actualizar, eliminar, listado, tabla,valores, condiciones, condicion;
+non terminal asignaciones, asignacion, columnas, operacion_relacional, operador_logico,literal, empty;
 
-
+non terminal String operador_relacional;
+non terminal InstruccionSeleccionar seleccionar;
 
 
 start with instruccion;
 
-instruccion ::= seleccionar {: System.out.println("Se encontro la instruccion seleccionar"); :}
+instruccion ::= seleccionar:s {:RESULT = s; :}
              | insertar {: System.out.println("Se encontro la instruccion insertar"); :}
              | actualizar {: System.out.println("Se encontro la instruccion actualizar"); :}
              | eliminar {: System.out.println("Se encontro la instruccion eliminar"); :}
              ;
 
-seleccionar ::= SELECCIONAR listado EN LITERAL:p condiciones P_COMA {: System.out.println("Se encontro la instruccion seleccionar en "+p); :}
+seleccionar ::= SELECCIONAR listado EN LITERAL:p condiciones P_COMA {: 
+    System.out.println("Se encontro la instruccion seleccionar");
+    
+    //InstruccionSeleccionar seleccion = new InstruccionSeleccionar(asterisco, columnas, p,condiciones,operadoresLogicos);
+    
+    RESULT = new InstruccionSeleccionar(asterisco, columnas, p, condiciones, operadoresLogicos);;
+    
+    limpiarEstructuras();
+   
+:}
             ;
 
-listado ::= ASTERISCO {: System.out.println("Se encontro * "); :}
-	| columnas {: System.out.println("Se encontro la columna"); :}
+listado ::= ASTERISCO {: asterisco = "*"; :}
+	| columnas
         ;
 
 insertar ::= INSERTAR EN LITERAL tabla VALORES PARENTESIS_ABRE valores PARENTESIS_CIERRA P_COMA;
@@ -52,11 +87,11 @@ asignacion ::= NOMBRECOLUMNA SIMB_IGUAL literal
 eliminar ::= ELIMINAR EN LITERAL condiciones P_COMA
             ;
 
-columnas ::= NOMBRECOLUMNA:c1 COMA columnas {: System.out.println("Se encontro la columna "+c1); :}
-	|NOMBRECOLUMNA:c2 {: System.out.println("Se encontro columna "+c2); :}
+columnas ::= NOMBRECOLUMNA:c1 COMA columnas {:columnas.add(c1);:}
+	|NOMBRECOLUMNA:c2 {:columnas.add(c2);:}
         ;
 
-condiciones ::= FILTRAR condicion {: System.out.println("filtramos"); :}
+condiciones ::= FILTRAR condicion
 		| empty {: System.out.println("no se encontro nada"); :}
                 ;
 
@@ -66,23 +101,47 @@ condicion ::= operacion_relacional operador_logico condicion
 
            
 
-operacion_relacional ::= NOMBRECOLUMNA operador_relacional literal {: System.out.println("operacion relacional"); :}
+operacion_relacional ::= NOMBRECOLUMNA:c operador_relacional:o literal:li {:
+    String operador = "";
+    switch(o) {
+        case "igual":
+            operador = "=";
+            break;
+        case "menor":
+            operador = "<";
+            break;
+        case "mayor":
+            operador = ">";
+            break;
+        case "meigual":
+            operador = "<=";
+            break;
+        case "maigual":
+            operador = ">=";
+            break;
+        case "noigual":
+            operador = "<>";
+            break;
+    }
+    String valorLiteral = li.toString();
+    condiciones.add(new Columna(c, o , valorLiteral)); 
+:}
                     ;
 
-literal ::= LITERAL:l {: System.out.println("literal: "+l); :}
-            | NUMBER:n {: System.out.println("literal: "+n); :}
+literal ::= LITERAL:l
+            | NUMBER:n 
             ;
 
-operador_relacional ::= SIMB_IGUAL
-                   | SIMB_MENOR
-                   | SIMB_MAYOR
-                   | SIMB_MENOR_IGUAL
-                   | SIMB_MAYOR_IGUAL
-                   | SIMB_NO_IGUAL
+operador_relacional ::= SIMB_IGUAL:igual {:RESULT = "igual";:}
+                   | SIMB_MENOR:menor {:RESULT = "menor";:}
+                   | SIMB_MAYOR:mayor {:RESULT = "mayor";:}
+                   | SIMB_MENOR_IGUAL:meigual {:RESULT = "meigual";:}
+                   | SIMB_MAYOR_IGUAL:maigual {:RESULT = "maigual";:}
+                   | SIMB_NO_IGUAL:noigual {:RESULT = "noigual";:}
                    ;
 
-operador_logico ::= OP_AND
-                | OP_OR
+operador_logico ::= OP_AND {: operadoresLogicos.add("AND"); :}
+                | OP_OR {: operadoresLogicos.add("OR"); :}
                 ;
 
 empty ::= /* empty */ {: System.out.println("no se encontro nada"); :} ;
