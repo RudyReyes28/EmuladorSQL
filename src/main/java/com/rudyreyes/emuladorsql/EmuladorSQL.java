@@ -21,9 +21,9 @@ public class EmuladorSQL {
         String st = "INSERTAR EN \"proyecto.archivo1\" (columna1,columna2) VALORES (\"val1\",2);";
         //String st = "INSERTAR EN \"proyecto.archivo1\" VALORES (\"val1\",2);";
         //String st = "ACTUALIZAR EN \"proyecto.archivo1\" ASIGNAR columna1=\"Valor\",columna2=2 FILTRAR columna2=1 AND columna3>=5;";
-        //String st = "ACTUALIZAR EN \"proyecto.archivo1\" ASIGNAR columna1=\"Valor\",columna2=2;";
-        //String st = "ELIMINAR \n EN \"proyecto.archivo1\" \n ;";
-        String todo = st1+"\n"+st;
+        String st2 = "ACTUALIZAR EN \"proyecto.archivo1\" ASIGNAR columna1=\"Valor\",columna2=2;";
+        String st4 = "ELIMINAR \n EN \"proyecto.archivo1\" FILTRAR columna1 = \"hola\" AND columna2 = 5 AND columna2 > 5 ;";
+        String todo = st1+"\n"+st+st2+st4;
         LexerSQL lexer = new LexerSQL(new StringReader(todo));
         ParserSQL parser = new ParserSQL(lexer);
         
@@ -36,7 +36,7 @@ public class EmuladorSQL {
                 if (objetos instanceof InstruccionSeleccionar) {
                     InstruccionSeleccionar seleccion = (InstruccionSeleccionar) objetos;
                     if (seleccion != null) {
-                        System.out.println("Consultas para seleccionar :");
+                        System.out.println("\nConsultas para seleccionar :");
                         seleccion.imprimirDatos();
                     }
                 } else if (objetos instanceof InstruccionInsertar) {
@@ -44,6 +44,20 @@ public class EmuladorSQL {
                     if (insertar != null) {
                         System.out.println("\nConsultas para insertar: ");
                         insertar.mostrarDatos();
+                    }
+
+                } else if (objetos instanceof InstruccionActualizar) {
+                    InstruccionActualizar actualizar = (InstruccionActualizar) objetos;
+                    if (actualizar != null) {
+                        System.out.println("\nConsultas para actualizar: ");
+                        actualizar.mostrarDatos();
+                    }
+
+                } else if (objetos instanceof InstruccionEliminar) {
+                    InstruccionEliminar eliminar = (InstruccionEliminar) objetos;
+                    if (eliminar != null) {
+                        System.out.println("\nConsultas para Eliminar: ");
+                        eliminar.mostrarDatos();
                     }
 
                 } else {
