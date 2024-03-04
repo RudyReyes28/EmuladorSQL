@@ -8,6 +8,7 @@ import com.rudyreyes.emuladorsql.modelo.archivos.Proyecto;
 import com.rudyreyes.emuladorsql.vista.util.NodoDirectorio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFileChooser;
@@ -54,8 +55,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         nuevoProyecto = new javax.swing.JButton();
         scrollArbol = new javax.swing.JScrollPane();
         arbolProyecto = new javax.swing.JTree();
+        jLabel1 = new javax.swing.JLabel();
+        scrollAreaConsultas = new javax.swing.JScrollPane();
+        areaConsultas = new javax.swing.JTextArea();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        scrollConsola = new javax.swing.JScrollPane();
+        areaConsola = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Consultas SQL");
 
         nuevoProyecto.setText("Nuevo");
         nuevoProyecto.addActionListener(new java.awt.event.ActionListener() {
@@ -68,16 +79,49 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         arbolProyecto.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         scrollArbol.setViewportView(arbolProyecto);
 
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel1.setText("Area de Consultas:");
+
+        areaConsultas.setColumns(20);
+        areaConsultas.setRows(5);
+        areaConsultas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                areaConsultasKeyReleased(evt);
+            }
+        });
+        scrollAreaConsultas.setViewportView(areaConsultas);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jTabbedPane1.addTab("tab1", jScrollPane1);
+
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        jLabel2.setText("Area de Consola:");
+
+        areaConsola.setColumns(20);
+        areaConsola.setRows(5);
+        scrollConsola.setViewportView(areaConsola);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nuevoProyecto))
-                .addContainerGap(499, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nuevoProyecto)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(scrollArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(scrollAreaConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                            .addComponent(jTabbedPane1)))
+                    .addComponent(jLabel2)
+                    .addComponent(scrollConsola))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,8 +129,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(nuevoProyecto)
                 .addGap(18, 18, 18)
-                .addComponent(scrollArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(scrollAreaConsultas))
+                    .addComponent(scrollArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrollConsola, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -97,7 +152,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -235,6 +292,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nuevoProyectoActionPerformed
 
+    private void areaConsultasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areaConsultasKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && evt.getModifiersEx() == 0) {
+            // Verificar si la consulta está completa al detectar un punto y coma
+            String query = areaConsultas.getText().trim();
+            if (query.endsWith(";")) {
+                // La consulta está completa, ejecutar la acción
+                System.out.println(query);
+            }
+        }
+
+    }//GEN-LAST:event_areaConsultasKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -272,8 +341,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree arbolProyecto;
+    private javax.swing.JTextArea areaConsola;
+    private javax.swing.JTextArea areaConsultas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton nuevoProyecto;
     private javax.swing.JScrollPane scrollArbol;
+    private javax.swing.JScrollPane scrollAreaConsultas;
+    private javax.swing.JScrollPane scrollConsola;
     // End of variables declaration//GEN-END:variables
 }
