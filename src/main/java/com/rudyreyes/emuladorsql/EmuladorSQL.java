@@ -15,7 +15,7 @@ import java_cup.runtime.Symbol;
  */
 public class EmuladorSQL {
 
-    public static void main(String[] args) throws Exception {
+    public static void EmuladorSQL(){
         //String st =  "SELECCIONAR columna1, columna2, columna3 EN \"proyecto.archivo1\" ;";
         String st1 =  "SELECCIONAR columna1 , columna2 EN \"proyecto.archivo1\" FILTRAR columna1 = \"hola\" AND columna2 = 5 AND columna2 > 5;";
         String st = "INSERTAR EN \"proyecto.archivo1\" (columna1,columna2) VALORES (\"val1\",2);";
