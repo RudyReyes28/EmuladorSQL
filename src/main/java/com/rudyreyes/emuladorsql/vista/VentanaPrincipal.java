@@ -5,6 +5,7 @@
 package com.rudyreyes.emuladorsql.vista;
 
 import com.rudyreyes.emuladorsql.modelo.archivos.Proyecto;
+import com.rudyreyes.emuladorsql.modelo.archivos.util.CrearArchivos;
 import com.rudyreyes.emuladorsql.vista.util.NodoDirectorio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,8 @@ import javax.swing.JOptionPane;
 import java.io.File;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.*;
@@ -39,6 +42,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         arbolProyecto.setModel(modeloArbol);
         tooltipArbol();
         crearArchivos();
+        verArchivos();
         setLocationRelativeTo(null);
     }
 
@@ -58,9 +62,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         scrollAreaConsultas = new javax.swing.JScrollPane();
         areaConsultas = new javax.swing.JTextArea();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        seccionArchivos = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        areaLecturaArchivos = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         scrollConsola = new javax.swing.JScrollPane();
         areaConsola = new javax.swing.JTextArea();
@@ -91,11 +95,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         scrollAreaConsultas.setViewportView(areaConsultas);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        areaLecturaArchivos.setColumns(20);
+        areaLecturaArchivos.setRows(5);
+        jScrollPane1.setViewportView(areaLecturaArchivos);
 
-        jTabbedPane1.addTab("tab1", jScrollPane1);
+        seccionArchivos.addTab("tab1", jScrollPane1);
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jLabel2.setText("Area de Consola:");
@@ -118,7 +122,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
                             .addComponent(scrollAreaConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
-                            .addComponent(jTabbedPane1)))
+                            .addComponent(seccionArchivos)))
                     .addComponent(jLabel2)
                     .addComponent(scrollConsola))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -131,7 +135,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(seccionArchivos, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -194,6 +198,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
     }
     
+    private void verArchivos(){
+        arbolProyecto.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 1) {
+                    TreePath path = arbolProyecto.getPathForLocation(e.getX(), e.getY());
+                    if (path != null) {
+                        arbolProyecto.setSelectionPath(path);
+                        Object selectedNode = path.getLastPathComponent();
+                        
+                        if (selectedNode instanceof NodoDirectorio) {
+                            NodoDirectorio nodoSeleccionado = (NodoDirectorio) selectedNode;
+                            if (!nodoSeleccionado.isDirectorio()) {
+                                String rutaArchivo = nodoSeleccionado.getUbicacion();
+                                String contenidoArchivo = CrearArchivos.obtenerContenidoArchivo(rutaArchivo);
+                                JTextArea areaContenido = new JTextArea(contenidoArchivo);
+                                
+                                seccionArchivos.addTab(nodoSeleccionado.getNombre(), new JScrollPane(areaContenido));
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
     private void mostrarMenuContextual(MouseEvent e) {
         JPopupMenu popupMenu = new JPopupMenu();
 
@@ -216,12 +245,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                         String pathDirectorio = ubicacionProyecto + File.separator + nombreDirectorio;
 
-                        proyecto.crearDirectorio(nombreDirectorio, pathDirectorio);
+                        boolean creado = proyecto.crearDirectorio(nombreDirectorio, pathDirectorio);
                         
-                        NodoDirectorio nuevoNodo = new NodoDirectorio(nombreDirectorio, pathDirectorio);
-                        selectedNode.add(nuevoNodo);
+                        if (creado) {
+                            NodoDirectorio nuevoNodo = new NodoDirectorio(nombreDirectorio, pathDirectorio);
+                            selectedNode.add(nuevoNodo);
+
+                            modeloArbol.reload();
+                        }
+
                         
-                        modeloArbol.reload();
 
                     }
                 }else{
@@ -246,12 +279,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                         String pathArchivo = ubicacionProyecto + File.separator + nombreArchivo+".csv";
 
-                        proyecto.crearArchivo(nombreArchivo, pathArchivo);
+                        boolean creado = proyecto.crearArchivo(nombreArchivo, pathArchivo);
+                       
+                        if (creado) {
+                            NodoDirectorio nuevoNodo = new NodoDirectorio(nombreArchivo, pathArchivo);
+                            nodoSeleccion.add(nuevoNodo);
+
+                            modeloArbol.reload();
+                        }
                         
-                        NodoDirectorio nuevoNodo = new NodoDirectorio(nombreArchivo, pathArchivo);
-                        nodoSeleccion.add(nuevoNodo);
-                        
-                        modeloArbol.reload();
 
                     }
                 }else{
@@ -343,15 +379,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTree arbolProyecto;
     private javax.swing.JTextArea areaConsola;
     private javax.swing.JTextArea areaConsultas;
+    private javax.swing.JTextArea areaLecturaArchivos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton nuevoProyecto;
     private javax.swing.JScrollPane scrollArbol;
     private javax.swing.JScrollPane scrollAreaConsultas;
     private javax.swing.JScrollPane scrollConsola;
+    private javax.swing.JTabbedPane seccionArchivos;
     // End of variables declaration//GEN-END:variables
 }

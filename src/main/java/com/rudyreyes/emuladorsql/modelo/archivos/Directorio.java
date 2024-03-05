@@ -38,7 +38,7 @@ public class Directorio {
         this.pathDirectorio = pathDirectorio;
     }
     
-    public void crearDirectorio(){
-        CrearArchivos.crearDirecctorio(pathDirectorio);
+    public boolean crearDirectorio(){
+        return CrearArchivos.crearDirecctorio(pathDirectorio);
     }
 }

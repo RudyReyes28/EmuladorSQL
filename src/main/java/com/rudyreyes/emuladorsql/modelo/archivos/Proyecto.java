@@ -58,17 +58,19 @@ public class Proyecto {
         this.archivos = archivos;
     }
     
-    public void crearDirectorio(String nombre,String path){
+    public boolean crearDirectorio(String nombre,String path){
         Directorio dr = new Directorio(nombre, path);
-        dr.crearDirectorio();
-        this.directorios.add(new Directorio(dr.getNombreDirectorio(), dr.getPathDirectorio()));
+        this.directorios.add(new Directorio(nombre, path));
+        return dr.crearDirectorio();
     }
     
     
-    public void crearArchivo(String nombre, String path){
+    public boolean crearArchivo(String nombre, String path){
         Archivo ar = new Archivo(nombre,path);
-        ar.crearArchivo();
+        
         this.archivos.add(new Archivo(nombre, path));
+        
+        return ar.crearArchivo();
     }
     
     public void crearProyecto(){

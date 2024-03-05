@@ -39,7 +39,7 @@ public class Archivo {
         this.pathArchivo = pathArchivo;
     }
    
-    public void crearArchivo(){
-        CrearArchivos.crearArchivo(pathArchivo);
+    public boolean crearArchivo(){
+        return CrearArchivos.crearArchivo(pathArchivo);
     }
 }

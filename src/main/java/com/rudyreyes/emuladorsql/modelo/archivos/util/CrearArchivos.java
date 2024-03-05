@@ -6,6 +6,9 @@ package com.rudyreyes.emuladorsql.modelo.archivos.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class CrearArchivos {
 
-    public static void crearDirecctorio(String rutaAbsoluta){
+    public static boolean crearDirecctorio(String rutaAbsoluta){
         
 
         // Crear un objeto File con la ruta del directorio
@@ -27,15 +30,18 @@ public class CrearArchivos {
 
             if (creado) {
                 JOptionPane.showMessageDialog(null, "Directorio Creado con exito");
+                return true;
             } else {
                 JOptionPane.showMessageDialog(null, "No se puede crear el directorio");
+                return false;
             }
         } else {
             JOptionPane.showMessageDialog(null, "El directorio ya existe");
+            return false;
         }
     }
     
-    public static void crearArchivo(String rutaAbsoluta){
+    public static boolean crearArchivo(String rutaAbsoluta){
         
 
         // Crear un objeto File
@@ -44,12 +50,28 @@ public class CrearArchivos {
         try {
             // Verificar si el archivo ya existe
             if (archivo.createNewFile()) {
-                JOptionPane.showMessageDialog(null, "El archivo creado con exito");
+                JOptionPane.showMessageDialog(null, "El archivo se ha creado con exito");
+                return true;
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo ya existe");
+                return false;
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo crear el directorio");
+            JOptionPane.showMessageDialog(null, "No se pudo crear el archivo");
+            return false;
         }
+    }
+    
+    public static String obtenerContenidoArchivo(String rutaAbsoluta){
+         String contenido = "";
+        try {
+            Path path = Paths.get(rutaAbsoluta);
+            contenido = new String(Files.readAllBytes(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejar la excepción según tus necesidades
+            JOptionPane.showMessageDialog(null,"No se pudo leer el archivo");
+        }
+        return contenido;
     }
 }
