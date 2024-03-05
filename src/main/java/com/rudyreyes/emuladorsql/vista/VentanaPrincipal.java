@@ -11,6 +11,7 @@ import com.rudyreyes.emuladorsql.modelo.InstruccionSeleccionar;
 import com.rudyreyes.emuladorsql.modelo.archivos.Proyecto;
 import com.rudyreyes.emuladorsql.modelo.archivos.util.CrearArchivos;
 import com.rudyreyes.emuladorsql.vista.util.MiModeloTabla;
+import com.rudyreyes.emuladorsql.vista.util.MostrarConsultasSeleccionar;
 import com.rudyreyes.emuladorsql.vista.util.NodoDirectorio;
 import java.awt.BorderLayout;
 import java.awt.Frame;
@@ -342,6 +343,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_nuevoProyectoActionPerformed
 
     private void mostrarConsultasSeleccionar(String datosCSV,InstruccionSeleccionar seleccion ){
+        /*
         String[] lineas = datosCSV.split("\n");
 
         // Obtener nombres de columnas
@@ -367,15 +369,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // Crear la tabla
         JTable tabla = new JTable(modeloTabla);
         // Crear el JScrollPane con la tabla
-        if(seleccion.getSeleccionarTodo().equals("*")){
-        JScrollPane scrollPane = new JScrollPane(tabla);
+        if (seleccion.getSeleccionarTodo().equals("*")) {
+            JScrollPane scrollPane = new JScrollPane(tabla);
+            JDialog dialog = new JDialog((Frame) null, "Tabla desde CSV", true);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setLayout(new BorderLayout());
+            dialog.add(scrollPane, BorderLayout.CENTER);
+            dialog.setSize(400, 300);
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        }*/
+        JScrollPane scroll = MostrarConsultasSeleccionar.mostrarTablasSeleccionar(datosCSV, seleccion);
+        
+        if(scroll == null){
+            System.out.println("Es null");
+        }else{
+        
         JDialog dialog = new JDialog((Frame) null, "Tabla desde CSV", true);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        dialog.setLayout(new BorderLayout());
-        dialog.add(scrollPane, BorderLayout.CENTER);
-        dialog.setSize(400, 300);
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);}
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setLayout(new BorderLayout());
+            dialog.add(scroll, BorderLayout.CENTER);
+            dialog.setSize(400, 300);
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        }
     }
     
     private void areaConsultasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areaConsultasKeyReleased
