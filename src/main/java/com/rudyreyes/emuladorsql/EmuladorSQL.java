@@ -24,13 +24,13 @@ public class EmuladorSQL {
         String st2 = "ACTUALIZAR EN \"proyecto.archivo1\" ASIGNAR columna1=\"Valor\",columna2=2;";
         String st4 = "ELIMINAR \n EN \"proyecto.archivo1\" FILTRAR columna1 = \"hola\" AND columna2 = 5 AND columna2 > 5 ;";
         String todo = st1+"\n"+st+st2+st4;
-        LexerSQL lexer = new LexerSQL(new StringReader(todo));
-        ParserSQL parser = new ParserSQL(lexer);
+        //LexerSQL lexer = new LexerSQL(new StringReader(todo));
+        //ParserSQL parser = new ParserSQL(lexer);
         
-        
+        /*
         try {
             Symbol symbol = parser.parse();
-            ArrayList<Object> consultas = new ArrayList<>(parser.obtenerConsultas());
+            //ArrayList<Object> consultas = new ArrayList<>(parser.obtenerConsultas());
             
             for(Object objetos: consultas){
                 if (objetos instanceof InstruccionSeleccionar) {
@@ -79,12 +79,12 @@ public class EmuladorSQL {
                 System.out.println("No es instancia");
             }*/
             
-            
+         /*   
         } catch (Exception e) {
             // Manejar excepciones si ocurren durante el análisis
             e.printStackTrace();
         }
-        
+        */
         
     }
 }

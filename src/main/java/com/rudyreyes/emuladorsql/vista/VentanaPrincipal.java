@@ -4,9 +4,16 @@
  */
 package com.rudyreyes.emuladorsql.vista;
 
+import com.rudyreyes.emuladorsql.modelo.InstruccionActualizar;
+import com.rudyreyes.emuladorsql.modelo.InstruccionEliminar;
+import com.rudyreyes.emuladorsql.modelo.InstruccionInsertar;
+import com.rudyreyes.emuladorsql.modelo.InstruccionSeleccionar;
 import com.rudyreyes.emuladorsql.modelo.archivos.Proyecto;
 import com.rudyreyes.emuladorsql.modelo.archivos.util.CrearArchivos;
+import com.rudyreyes.emuladorsql.vista.util.MiModeloTabla;
 import com.rudyreyes.emuladorsql.vista.util.NodoDirectorio;
+import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,9 +22,15 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.io.File;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+import java_cup.runtime.Symbol;
+import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
@@ -328,13 +341,98 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nuevoProyectoActionPerformed
 
+    private void mostrarConsultasSeleccionar(String datosCSV,InstruccionSeleccionar seleccion ){
+        String[] lineas = datosCSV.split("\n");
+
+        // Obtener nombres de columnas
+        String[] columnas = lineas[0].split(",");
+
+        // Obtener datos
+        List<Object[]> datosList = new ArrayList<>();
+
+        for (int i = 1; i < lineas.length; i++) {
+            String[] valores = lineas[i].split(",");
+            datosList.add(valores);
+        }
+
+        // Convertir List<Object[]> a Object[][]
+        Object[][] datos = new Object[datosList.size()][columnas.length];
+        for (int i = 0; i < datosList.size(); i++) {
+            datos[i] = datosList.get(i);
+        }
+        
+        // Crear el modelo de tabla
+        MiModeloTabla modeloTabla = new MiModeloTabla( columnas,datos);
+
+        // Crear la tabla
+        JTable tabla = new JTable(modeloTabla);
+        // Crear el JScrollPane con la tabla
+        if(seleccion.getSeleccionarTodo().equals("*")){
+        JScrollPane scrollPane = new JScrollPane(tabla);
+        JDialog dialog = new JDialog((Frame) null, "Tabla desde CSV", true);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setLayout(new BorderLayout());
+        dialog.add(scrollPane, BorderLayout.CENTER);
+        dialog.setSize(400, 300);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);}
+    }
+    
     private void areaConsultasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areaConsultasKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_ENTER && evt.getModifiersEx() == 0) {
             // Verificar si la consulta está completa al detectar un punto y coma
             String query = areaConsultas.getText().trim();
             if (query.endsWith(";")) {
-                // La consulta está completa, ejecutar la acción
-                System.out.println(query);
+                LexerSQL lexer = new LexerSQL(new StringReader(query));
+                ParserSQL parser = new ParserSQL(lexer);
+        
+        
+        try {
+            Symbol symbol = parser.parse();
+            ArrayList<Object> consultas = new ArrayList<>(parser.obtenerConsultas());
+            //C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv
+            for(Object objetos: consultas){
+                if (objetos instanceof InstruccionSeleccionar) {
+                    InstruccionSeleccionar seleccion = (InstruccionSeleccionar) objetos;
+                    if (seleccion != null) {
+                        //System.out.println("\nConsultas para seleccionar :");
+                        seleccion.imprimirDatos();
+                        String path = seleccion.getPath().replace("\"", "");
+                        String extraerArchivo =CrearArchivos.obtenerContenidoArchivo(path);
+                        mostrarConsultasSeleccionar(extraerArchivo, seleccion);
+                        
+                        //SELECCIONAR columna1 , columna2 EN "C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv" FILTRAR columna1 = "hola" AND columna2 = 5 AND columna2 > 5;
+                    }
+                } else if (objetos instanceof InstruccionInsertar) {
+                    InstruccionInsertar insertar = (InstruccionInsertar) objetos;
+                    if (insertar != null) {
+                        System.out.println("\nConsultas para insertar: ");
+                        insertar.mostrarDatos();
+                    }
+
+                } else if (objetos instanceof InstruccionActualizar) {
+                    InstruccionActualizar actualizar = (InstruccionActualizar) objetos;
+                    if (actualizar != null) {
+                        System.out.println("\nConsultas para actualizar: ");
+                        actualizar.mostrarDatos();
+                    }
+
+                } else if (objetos instanceof InstruccionEliminar) {
+                    InstruccionEliminar eliminar = (InstruccionEliminar) objetos;
+                    if (eliminar != null) {
+                        System.out.println("\nConsultas para Eliminar: ");
+                        eliminar.mostrarDatos();
+                    }
+
+                } else {
+                    System.out.println("No es instancia");
+                }
+            }
+            
+        } catch (Exception e) {
+            // Manejar excepciones si ocurren durante el análisis
+            e.printStackTrace();
+        }
             }
         }
 

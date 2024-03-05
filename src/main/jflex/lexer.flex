@@ -1,4 +1,4 @@
-package com.rudyreyes.emuladorsql;
+package com.rudyreyes.emuladorsql.vista;
 import java.io.*;
 import java_cup.runtime.*;
 
@@ -25,8 +25,6 @@ import java_cup.runtime.*;
 
 number = [0-9]
 letter = [a-zA-Z]
-//LITERAL = ({number}+|\"[^\"]*\")
-//PATH = (\"[^\"]*\")
 LITERAL = (\"[^\"]*\")
 whitespace = [ \t\r]
 newline = [\n]
@@ -39,10 +37,7 @@ newline = [\n]
 %%
 
 
-//<YYINITIAL> EN { return new Symbol(ParserSQLSym.EN); }
-//<YYINITIAL> {PATH} EN { return new Symbol(ParserSQLSym.PATH, yytext()); }
 "EN"                                      { return new Symbol(ParserSQLSym.EN); }
-//{PATH} { return new Symbol(ParserSQLSym.PATH, yytext()); }
 "SELECCIONAR"                           { return symbol(ParserSQLSym.SELECCIONAR); }
 "INSERTAR"                              { return symbol(ParserSQLSym.INSERTAR); }
 "ACTUALIZAR"                            { return symbol(ParserSQLSym.ACTUALIZAR); }

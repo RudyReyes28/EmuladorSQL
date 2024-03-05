@@ -1,4 +1,4 @@
-package com.rudyreyes.emuladorsql;
+package com.rudyreyes.emuladorsql.vista;
 import java.util.ArrayList;
 import java_cup.runtime.*;
 import com.rudyreyes.emuladorsql.modelo.*;
