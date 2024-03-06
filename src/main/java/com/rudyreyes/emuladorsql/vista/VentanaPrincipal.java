@@ -11,6 +11,7 @@ import com.rudyreyes.emuladorsql.modelo.InstruccionSeleccionar;
 import com.rudyreyes.emuladorsql.modelo.archivos.Proyecto;
 import com.rudyreyes.emuladorsql.modelo.archivos.util.CrearArchivos;
 import com.rudyreyes.emuladorsql.vista.util.ActualizarFilasTablas;
+import com.rudyreyes.emuladorsql.vista.util.EliminarFilasTabla;
 import com.rudyreyes.emuladorsql.vista.util.InsertarFilasTabla;
 import com.rudyreyes.emuladorsql.vista.util.MiModeloTabla;
 import com.rudyreyes.emuladorsql.vista.util.MostrarConsultasSeleccionar;
@@ -414,8 +415,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         } else if (objetos instanceof InstruccionEliminar) {
                             InstruccionEliminar eliminar = (InstruccionEliminar) objetos;
                             if (eliminar != null) {
-                                System.out.println("\nConsultas para Eliminar: ");
-                                eliminar.mostrarDatos();
+                                //System.out.println("\nConsultas para Eliminar: ");
+                                //eliminar.mostrarDatos();
+                                String path = eliminar.getPath().replace("\"", "");
+                                String extraerArchivo = CrearArchivos.obtenerContenidoArchivo(path);
+                                EliminarFilasTabla.eliminarFilasTablas(extraerArchivo, eliminar, areaConsola);
                             }
 
                         } else {
