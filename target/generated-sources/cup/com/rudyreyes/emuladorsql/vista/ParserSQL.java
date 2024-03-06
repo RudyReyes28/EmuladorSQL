@@ -33,18 +33,21 @@ public class ParserSQL extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\046\000\002\002\004\000\002\002\004\000\002\002" +
+    "\000\057\000\002\002\004\000\002\002\004\000\002\002" +
     "\003\000\002\003\003\000\002\003\003\000\002\003\003" +
-    "\000\002\003\003\000\002\021\010\000\002\004\003\000" +
-    "\002\004\003\000\002\022\013\000\002\005\005\000\002" +
-    "\005\003\000\002\006\005\000\002\006\003\000\002\023" +
-    "\011\000\002\011\005\000\002\011\003\000\002\012\005" +
-    "\000\002\024\007\000\002\013\005\000\002\013\003\000" +
-    "\002\007\004\000\002\007\003\000\002\010\005\000\002" +
-    "\010\003\000\002\014\005\000\002\020\003\000\002\020" +
-    "\003\000\002\017\003\000\002\017\003\000\002\017\003" +
-    "\000\002\017\003\000\002\017\003\000\002\017\003\000" +
-    "\002\015\003\000\002\015\003\000\002\016\002" });
+    "\000\002\003\003\000\002\003\003\000\002\021\010\000" +
+    "\002\004\003\000\002\004\003\000\002\022\013\000\002" +
+    "\005\005\000\002\005\003\000\002\005\003\000\002\006" +
+    "\005\000\002\006\003\000\002\023\011\000\002\011\005" +
+    "\000\002\011\003\000\002\012\005\000\002\012\003\000" +
+    "\002\024\007\000\002\013\005\000\002\013\003\000\002" +
+    "\013\003\000\002\007\004\000\002\007\003\000\002\007" +
+    "\003\000\002\010\005\000\002\010\003\000\002\014\005" +
+    "\000\002\014\003\000\002\020\003\000\002\020\003\000" +
+    "\002\020\003\000\002\017\003\000\002\017\003\000\002" +
+    "\017\003\000\002\017\003\000\002\017\003\000\002\017" +
+    "\003\000\002\017\003\000\002\015\003\000\002\015\003" +
+    "\000\002\015\003\000\002\016\002" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -52,53 +55,67 @@ public class ParserSQL extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\111\000\012\004\015\006\012\007\010\011\011\001" +
-    "\002\000\014\002\ufffe\004\ufffe\006\ufffe\007\ufffe\011\ufffe" +
-    "\001\002\000\014\002\ufffc\004\ufffc\006\ufffc\007\ufffc\011" +
-    "\ufffc\001\002\000\014\002\ufffb\004\ufffb\006\ufffb\007\ufffb" +
-    "\011\ufffb\001\002\000\014\002\ufffd\004\ufffd\006\ufffd\007" +
-    "\ufffd\011\ufffd\001\002\000\004\013\100\001\002\000\004" +
-    "\013\074\001\002\000\004\013\055\001\002\000\004\002" +
-    "\054\001\002\000\014\002\uffff\004\015\006\012\007\010" +
-    "\011\011\001\002\000\006\020\016\031\021\001\002\000" +
-    "\004\013\ufff9\001\002\000\004\013\024\001\002\000\004" +
-    "\013\ufff8\001\002\000\010\013\uffec\015\uffec\016\022\001" +
-    "\002\000\004\031\021\001\002\000\006\013\uffed\015\uffed" +
-    "\001\002\000\004\032\025\001\002\000\006\005\026\012" +
-    "\uffdc\001\002\000\004\031\034\001\002\000\004\012\uffea" +
-    "\001\002\000\004\012\031\001\002\000\014\002\ufffa\004" +
-    "\ufffa\006\ufffa\007\ufffa\011\ufffa\001\002\000\010\012\uffe8" +
-    "\027\047\030\051\001\002\000\004\012\uffeb\001\002\000" +
-    "\016\021\043\022\035\023\036\024\037\025\041\026\042" +
-    "\001\002\000\006\032\uffe3\033\uffe3\001\002\000\006\032" +
-    "\uffe2\033\uffe2\001\002\000\006\032\uffe1\033\uffe1\001\002" +
-    "\000\006\032\044\033\045\001\002\000\006\032\uffe0\033" +
-    "\uffe0\001\002\000\006\032\uffdf\033\uffdf\001\002\000\006" +
-    "\032\uffe4\033\uffe4\001\002\000\016\005\uffe6\012\uffe6\015" +
-    "\uffe6\016\uffe6\027\uffe6\030\uffe6\001\002\000\016\005\uffe5" +
-    "\012\uffe5\015\uffe5\016\uffe5\027\uffe5\030\uffe5\001\002\000" +
-    "\010\012\uffe7\027\uffe7\030\uffe7\001\002\000\004\031\uffde" +
-    "\001\002\000\004\031\034\001\002\000\004\031\uffdd\001" +
-    "\002\000\004\012\uffe9\001\002\000\004\002\000\001\002" +
-    "\000\004\002\001\001\002\000\004\032\056\001\002\000" +
-    "\006\014\060\017\uffdc\001\002\000\004\017\ufff5\001\002" +
-    "\000\004\031\021\001\002\000\004\017\062\001\002\000" +
-    "\004\014\063\001\002\000\006\032\044\033\045\001\002" +
-    "\000\006\015\ufff3\016\070\001\002\000\004\015\066\001" +
-    "\002\000\004\012\067\001\002\000\014\002\ufff7\004\ufff7" +
-    "\006\ufff7\007\ufff7\011\ufff7\001\002\000\006\032\044\033" +
-    "\045\001\002\000\004\015\ufff4\001\002\000\004\015\073" +
-    "\001\002\000\004\017\ufff6\001\002\000\004\032\075\001" +
-    "\002\000\006\005\026\012\uffdc\001\002\000\004\012\077" +
-    "\001\002\000\014\002\uffee\004\uffee\006\uffee\007\uffee\011" +
-    "\uffee\001\002\000\004\032\101\001\002\000\004\010\102" +
-    "\001\002\000\004\031\103\001\002\000\004\021\112\001" +
-    "\002\000\006\005\026\012\uffdc\001\002\000\010\005\ufff0" +
-    "\012\ufff0\016\106\001\002\000\004\031\103\001\002\000" +
-    "\006\005\ufff1\012\ufff1\001\002\000\004\012\111\001\002" +
-    "\000\014\002\ufff2\004\ufff2\006\ufff2\007\ufff2\011\ufff2\001" +
-    "\002\000\006\032\044\033\045\001\002\000\010\005\uffef" +
-    "\012\uffef\016\uffef\001\002" });
+    "\000\122\000\014\003\016\004\015\006\012\007\010\011" +
+    "\011\001\002\000\016\002\ufffe\003\ufffe\004\ufffe\006\ufffe" +
+    "\007\ufffe\011\ufffe\001\002\000\016\002\ufffc\003\ufffc\004" +
+    "\ufffc\006\ufffc\007\ufffc\011\ufffc\001\002\000\016\002\ufffb" +
+    "\003\ufffb\004\ufffb\006\ufffb\007\ufffb\011\ufffb\001\002\000" +
+    "\016\002\ufffd\003\ufffd\004\ufffd\006\ufffd\007\ufffd\011\ufffd" +
+    "\001\002\000\004\013\110\001\002\000\004\013\104\001" +
+    "\002\000\004\013\064\001\002\000\004\002\063\001\002" +
+    "\000\016\002\uffff\003\016\004\015\006\012\007\010\011" +
+    "\011\001\002\000\010\003\021\020\017\031\023\001\002" +
+    "\000\016\002\ufffa\003\ufffa\004\ufffa\006\ufffa\007\ufffa\011" +
+    "\ufffa\001\002\000\004\013\ufff8\001\002\000\004\013\026" +
+    "\001\002\000\006\013\uffe8\015\uffe8\001\002\000\004\013" +
+    "\ufff7\001\002\000\010\013\uffe9\015\uffe9\016\024\001\002" +
+    "\000\006\003\021\031\023\001\002\000\006\013\uffea\015" +
+    "\uffea\001\002\000\004\032\027\001\002\000\010\003\030" +
+    "\005\031\012\uffd3\001\002\000\004\012\uffe5\001\002\000" +
+    "\006\003\036\031\040\001\002\000\004\012\uffe6\001\002" +
+    "\000\004\012\034\001\002\000\016\002\ufff9\003\ufff9\004" +
+    "\ufff9\006\ufff9\007\ufff9\011\ufff9\001\002\000\012\003\056" +
+    "\012\uffe3\027\055\030\060\001\002\000\012\003\uffe1\012" +
+    "\uffe1\027\uffe1\030\uffe1\001\002\000\004\012\uffe7\001\002" +
+    "\000\020\003\042\021\050\022\041\023\043\024\044\025" +
+    "\046\026\047\001\002\000\010\003\uffdc\032\uffdc\033\uffdc" +
+    "\001\002\000\010\003\uffd7\032\uffd7\033\uffd7\001\002\000" +
+    "\010\003\uffdb\032\uffdb\033\uffdb\001\002\000\010\003\uffda" +
+    "\032\uffda\033\uffda\001\002\000\010\003\052\032\051\033" +
+    "\053\001\002\000\010\003\uffd9\032\uffd9\033\uffd9\001\002" +
+    "\000\010\003\uffd8\032\uffd8\033\uffd8\001\002\000\010\003" +
+    "\uffdd\032\uffdd\033\uffdd\001\002\000\020\003\uffe0\005\uffe0" +
+    "\012\uffe0\015\uffe0\016\uffe0\027\uffe0\030\uffe0\001\002\000" +
+    "\020\003\uffde\005\uffde\012\uffde\015\uffde\016\uffde\027\uffde" +
+    "\030\uffde\001\002\000\020\003\uffdf\005\uffdf\012\uffdf\015" +
+    "\uffdf\016\uffdf\027\uffdf\030\uffdf\001\002\000\012\003\uffe2" +
+    "\012\uffe2\027\uffe2\030\uffe2\001\002\000\006\003\uffd6\031" +
+    "\uffd6\001\002\000\006\003\uffd4\031\uffd4\001\002\000\006" +
+    "\003\036\031\040\001\002\000\006\003\uffd5\031\uffd5\001" +
+    "\002\000\004\012\uffe4\001\002\000\004\002\000\001\002" +
+    "\000\004\002\001\001\002\000\004\032\065\001\002\000" +
+    "\010\003\066\014\070\017\uffd3\001\002\000\004\017\ufff3" +
+    "\001\002\000\004\017\ufff4\001\002\000\006\003\021\031" +
+    "\023\001\002\000\004\017\072\001\002\000\004\014\073" +
+    "\001\002\000\010\003\052\032\051\033\053\001\002\000" +
+    "\006\015\ufff1\016\100\001\002\000\004\015\076\001\002" +
+    "\000\004\012\077\001\002\000\016\002\ufff6\003\ufff6\004" +
+    "\ufff6\006\ufff6\007\ufff6\011\ufff6\001\002\000\010\003\052" +
+    "\032\051\033\053\001\002\000\004\015\ufff2\001\002\000" +
+    "\004\015\103\001\002\000\004\017\ufff5\001\002\000\004" +
+    "\032\105\001\002\000\010\003\030\005\031\012\uffd3\001" +
+    "\002\000\004\012\107\001\002\000\016\002\uffeb\003\uffeb" +
+    "\004\uffeb\006\uffeb\007\uffeb\011\uffeb\001\002\000\004\032" +
+    "\111\001\002\000\004\010\112\001\002\000\006\003\113" +
+    "\031\114\001\002\000\012\003\uffec\005\uffec\012\uffec\016" +
+    "\uffec\001\002\000\004\021\123\001\002\000\010\003\030" +
+    "\005\031\012\uffd3\001\002\000\012\003\uffee\005\uffee\012" +
+    "\uffee\016\117\001\002\000\006\003\113\031\114\001\002" +
+    "\000\010\003\uffef\005\uffef\012\uffef\001\002\000\004\012" +
+    "\122\001\002\000\016\002\ufff0\003\ufff0\004\ufff0\006\ufff0" +
+    "\007\ufff0\011\ufff0\001\002\000\010\003\052\032\051\033" +
+    "\053\001\002\000\012\003\uffed\005\uffed\012\uffed\016\uffed" +
+    "\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -106,35 +123,38 @@ public class ParserSQL extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\111\000\016\002\012\003\013\021\003\022\006\023" +
+    "\000\122\000\016\002\012\003\013\021\003\022\006\023" +
     "\004\024\005\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\016" +
-    "\002\052\003\013\021\003\022\006\023\004\024\005\001" +
-    "\001\000\006\004\016\013\017\001\001\000\002\001\001" +
+    "\002\061\003\013\021\003\022\006\023\004\024\005\001" +
+    "\001\000\006\004\017\013\021\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\013\022\001\001\000\002\001\001\000\002\001\001" +
-    "\000\006\007\027\016\026\001\001\000\006\010\032\014" +
-    "\031\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\004\015\047\001\001\000\002\001\001\000" +
-    "\004\017\037\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\020\045\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\006\010\051\014\031\001\001\000\002\001\001\000\002" +
+    "\002\001\001\000\002\001\001\000\004\013\024\001\001" +
+    "\000\002\001\001\000\002\001\001\000\006\007\032\016" +
+    "\031\001\001\000\002\001\001\000\006\010\036\014\034" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\006\005\060\016\056\001\001\000\002\001\001" +
-    "\000\004\013\071\001\001\000\002\001\001\000\002\001" +
-    "\001\000\006\006\064\020\063\001\001\000\002\001\001" +
+    "\001\000\004\015\056\001\001\000\002\001\001\000\002" +
+    "\001\001\000\004\017\044\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\020\053\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\006\010\060\014\034\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\006\006\070\020\063\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\006\007" +
-    "\075\016\026\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\006\011\103\012" +
-    "\104\001\001\000\002\001\001\000\006\007\107\016\026" +
-    "\001\001\000\002\001\001\000\006\011\106\012\104\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\020\112\001\001\000\002\001\001" });
+    "\002\001\001\000\006\005\070\016\066\001\001\000\002" +
+    "\001\001\000\002\001\001\000\004\013\101\001\001\000" +
+    "\002\001\001\000\002\001\001\000\006\006\074\020\073" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\006\006\100\020\073\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\006\007\105\016\031\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\006\011\114\012\115\001\001\000\002\001\001" +
+    "\000\002\001\001\000\006\007\120\016\031\001\001\000" +
+    "\002\001\001\000\006\011\117\012\115\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\004\020" +
+    "\123\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -180,6 +200,7 @@ public class ParserSQL extends java_cup.runtime.lr_parser {
     ArrayList<String> operadoresLogicos = new ArrayList<>();
     ArrayList<String> valoresInsertar = new ArrayList<>();
     ArrayList<Object> consultas = new ArrayList<>();
+    ArrayList<String> errores = new ArrayList<>();
     
     void limpiarEstructuras() {
         columnas.clear();
@@ -194,6 +215,10 @@ public class ParserSQL extends java_cup.runtime.lr_parser {
 
     ArrayList<Object> obtenerConsultas(){
         return consultas;
+    }
+
+    ArrayList<String> obtenerErrores(){
+        return errores;
     }
 
 
@@ -308,7 +333,19 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // seleccionar ::= SELECCIONAR listado EN LITERAL condiciones P_COMA 
+          case 7: // instruccion ::= error 
+            {
+              Object RESULT =null;
+		 
+                errores.add("Error, no se reconoce el simbolo inincial "+ cur_token.value +" fila: "+cur_token.left + " columna: " + cur_token.right);
+                
+                
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("instruccion",1, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 8: // seleccionar ::= SELECCIONAR listado EN LITERAL condiciones P_COMA 
             {
               InstruccionSeleccionar RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).left;
@@ -329,7 +366,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // listado ::= ASTERISCO 
+          case 9: // listado ::= ASTERISCO 
             {
               Object RESULT =null;
 		 asterisco = "*"; 
@@ -338,7 +375,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // listado ::= columnas 
+          case 10: // listado ::= columnas 
             {
               Object RESULT =null;
 
@@ -347,7 +384,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // insertar ::= INSERTAR EN LITERAL tabla VALORES PARENTESIS_ABRE valores PARENTESIS_CIERRA P_COMA 
+          case 11: // insertar ::= INSERTAR EN LITERAL tabla VALORES PARENTESIS_ABRE valores PARENTESIS_CIERRA P_COMA 
             {
               InstruccionInsertar RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-6)).left;
@@ -366,7 +403,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // tabla ::= PARENTESIS_ABRE columnas PARENTESIS_CIERRA 
+          case 12: // tabla ::= PARENTESIS_ABRE columnas PARENTESIS_CIERRA 
             {
               Object RESULT =null;
 
@@ -375,7 +412,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // tabla ::= empty 
+          case 13: // tabla ::= empty 
             {
               Object RESULT =null;
 
@@ -384,7 +421,18 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // valores ::= literal COMA valores 
+          case 14: // tabla ::= error 
+            {
+              Object RESULT =null;
+		 
+        errores.add("Error sintáctico en los parentesis cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right );
+    
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("tabla",3, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 15: // valores ::= literal COMA valores 
             {
               Object RESULT =null;
 		int lileft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).left;
@@ -396,7 +444,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // valores ::= literal 
+          case 16: // valores ::= literal 
             {
               Object RESULT =null;
 		int li2left = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -408,7 +456,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // actualizar ::= ACTUALIZAR EN LITERAL ASIGNAR asignaciones condiciones P_COMA 
+          case 17: // actualizar ::= ACTUALIZAR EN LITERAL ASIGNAR asignaciones condiciones P_COMA 
             {
               InstruccionActualizar RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-4)).left;
@@ -428,7 +476,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // asignaciones ::= asignacion COMA asignaciones 
+          case 18: // asignaciones ::= asignacion COMA asignaciones 
             {
               Object RESULT =null;
 
@@ -437,7 +485,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // asignaciones ::= asignacion 
+          case 19: // asignaciones ::= asignacion 
             {
               Object RESULT =null;
 
@@ -446,7 +494,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // asignacion ::= NOMBRECOLUMNA SIMB_IGUAL literal 
+          case 20: // asignacion ::= NOMBRECOLUMNA SIMB_IGUAL literal 
             {
               Object RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).left;
@@ -463,7 +511,18 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // eliminar ::= ELIMINAR EN LITERAL condiciones P_COMA 
+          case 21: // asignacion ::= error 
+            {
+              Object RESULT =null;
+		 
+        errores.add("Error sintáctico en la asignacion cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("asignacion",8, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 22: // eliminar ::= ELIMINAR EN LITERAL condiciones P_COMA 
             {
               InstruccionEliminar RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).left;
@@ -482,7 +541,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // columnas ::= NOMBRECOLUMNA COMA columnas 
+          case 23: // columnas ::= NOMBRECOLUMNA COMA columnas 
             {
               Object RESULT =null;
 		int c1left = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).left;
@@ -494,7 +553,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // columnas ::= NOMBRECOLUMNA 
+          case 24: // columnas ::= NOMBRECOLUMNA 
             {
               Object RESULT =null;
 		int c2left = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -506,7 +565,18 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // condiciones ::= FILTRAR condicion 
+          case 25: // columnas ::= error 
+            {
+              Object RESULT =null;
+		 
+        errores.add("Error sintáctico al nombrar las columnas cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("columnas",9, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 26: // condiciones ::= FILTRAR condicion 
             {
               Object RESULT =null;
 
@@ -515,7 +585,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // condiciones ::= empty 
+          case 27: // condiciones ::= empty 
             {
               Object RESULT =null;
 		 System.out.println("no se encontro nada"); 
@@ -524,7 +594,18 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // condicion ::= operacion_relacional operador_logico condicion 
+          case 28: // condiciones ::= error 
+            {
+              Object RESULT =null;
+		 
+                errores.add("Error sintáctico al FILTRAR las condiciones cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+                
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("condiciones",5, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 29: // condicion ::= operacion_relacional operador_logico condicion 
             {
               Object RESULT =null;
 
@@ -533,7 +614,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // condicion ::= operacion_relacional 
+          case 30: // condicion ::= operacion_relacional 
             {
               Object RESULT =null;
 
@@ -542,7 +623,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // operacion_relacional ::= NOMBRECOLUMNA operador_relacional literal 
+          case 31: // operacion_relacional ::= NOMBRECOLUMNA operador_relacional literal 
             {
               Object RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)).left;
@@ -555,8 +636,6 @@ class CUP$ParserSQL$actions {
 		int liright = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).right;
 		String li = (String)((java_cup.runtime.Symbol) CUP$ParserSQL$stack.peek()).value;
 		
-    
-    
     condiciones.add(new Columna(c, o , li)); 
 
               CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operacion_relacional",10, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.elementAt(CUP$ParserSQL$top-2)), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
@@ -564,7 +643,18 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // literal ::= LITERAL 
+          case 32: // operacion_relacional ::= error 
+            {
+              Object RESULT =null;
+		 
+        errores.add("Error sintáctico en la operacion relacional cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operacion_relacional",10, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 33: // literal ::= LITERAL 
             {
               String RESULT =null;
 		int lleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -576,7 +666,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // literal ::= NUMBER 
+          case 34: // literal ::= NUMBER 
             {
               String RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -588,7 +678,18 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // operador_relacional ::= SIMB_IGUAL 
+          case 35: // literal ::= error 
+            {
+              String RESULT =null;
+		 
+            errores.add("Error sintáctico en la literal : " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("literal",14, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 36: // operador_relacional ::= SIMB_IGUAL 
             {
               String RESULT =null;
 		int igualleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -600,7 +701,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // operador_relacional ::= SIMB_MENOR 
+          case 37: // operador_relacional ::= SIMB_MENOR 
             {
               String RESULT =null;
 		int menorleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -612,7 +713,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // operador_relacional ::= SIMB_MAYOR 
+          case 38: // operador_relacional ::= SIMB_MAYOR 
             {
               String RESULT =null;
 		int mayorleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -624,7 +725,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 32: // operador_relacional ::= SIMB_MENOR_IGUAL 
+          case 39: // operador_relacional ::= SIMB_MENOR_IGUAL 
             {
               String RESULT =null;
 		int meigualleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -636,7 +737,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 33: // operador_relacional ::= SIMB_MAYOR_IGUAL 
+          case 40: // operador_relacional ::= SIMB_MAYOR_IGUAL 
             {
               String RESULT =null;
 		int maigualleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -648,7 +749,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 34: // operador_relacional ::= SIMB_NO_IGUAL 
+          case 41: // operador_relacional ::= SIMB_NO_IGUAL 
             {
               String RESULT =null;
 		int noigualleft = ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()).left;
@@ -660,7 +761,18 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 35: // operador_logico ::= OP_AND 
+          case 42: // operador_relacional ::= error 
+            {
+              String RESULT =null;
+		 
+        errores.add("Error sintáctico en el operador relacional cerca de: "+ cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_relacional",13, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 43: // operador_logico ::= OP_AND 
             {
               Object RESULT =null;
 		 operadoresLogicos.add("AND"); 
@@ -669,7 +781,7 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 36: // operador_logico ::= OP_OR 
+          case 44: // operador_logico ::= OP_OR 
             {
               Object RESULT =null;
 		 operadoresLogicos.add("OR"); 
@@ -678,10 +790,21 @@ class CUP$ParserSQL$actions {
           return CUP$ParserSQL$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 37: // empty ::= 
+          case 45: // operador_logico ::= error 
             {
               Object RESULT =null;
-		 System.out.println("no se encontro nada"); 
+		 
+                errores.add("Error sintáctico en el operador logico cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    
+              CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("operador_logico",11, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
+            }
+          return CUP$ParserSQL$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 46: // empty ::= 
+            {
+              Object RESULT =null;
+
               CUP$ParserSQL$result = parser.getSymbolFactory().newSymbol("empty",12, ((java_cup.runtime.Symbol)CUP$ParserSQL$stack.peek()), RESULT);
             }
           return CUP$ParserSQL$result;

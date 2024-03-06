@@ -13,6 +13,7 @@ parser code {:
     ArrayList<String> operadoresLogicos = new ArrayList<>();
     ArrayList<String> valoresInsertar = new ArrayList<>();
     ArrayList<Object> consultas = new ArrayList<>();
+    ArrayList<String> errores = new ArrayList<>();
     
     void limpiarEstructuras() {
         columnas.clear();
@@ -27,6 +28,10 @@ parser code {:
 
     ArrayList<Object> obtenerConsultas(){
         return consultas;
+    }
+
+    ArrayList<String> obtenerErrores(){
+        return errores;
     }
 :}
 
@@ -55,6 +60,10 @@ instruccion ::= seleccionar:s {:RESULT = s; :}
              | insertar:i {:RESULT = i; :}
              | actualizar: a {:RESULT = a; :}
              | eliminar:e {: RESULT = e; :}
+             |error {: 
+                errores.add("Error, no se reconoce el simbolo inincial "+ cur_token.value +" fila: "+cur_token.left + " columna: " + cur_token.right);
+                
+                :}
              ;
 
 seleccionar ::= SELECCIONAR listado EN LITERAL:p condiciones P_COMA {: 
@@ -86,6 +95,9 @@ insertar ::= INSERTAR EN LITERAL:p tabla VALORES PARENTESIS_ABRE valores PARENTE
 
 tabla ::= PARENTESIS_ABRE columnas PARENTESIS_CIERRA
 	| empty
+        | error {: 
+        errores.add("Error sintáctico en los parentesis cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right );
+    :}
         ;
 
 valores ::= literal:li COMA valores {:valoresInsertar.add(li);:}
@@ -112,6 +124,9 @@ asignacion ::= NOMBRECOLUMNA:c SIMB_IGUAL literal:li
             {:
                 actualizarColumnas.add(new Columna(c, "=" , li)); 
             :}
+| error {: 
+        errores.add("Error sintáctico en la asignacion cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    :}
             ;
 
 eliminar ::= ELIMINAR EN LITERAL:p condiciones P_COMA
@@ -127,10 +142,16 @@ eliminar ::= ELIMINAR EN LITERAL:p condiciones P_COMA
 
 columnas ::= NOMBRECOLUMNA:c1 COMA columnas {:columnas.add(c1);:}
 	|NOMBRECOLUMNA:c2 {:columnas.add(c2);:}
+        | error {: 
+        errores.add("Error sintáctico al nombrar las columnas cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    :}
         ;
 
 condiciones ::= FILTRAR condicion
 		| empty {: System.out.println("no se encontro nada"); :}
+                | error {: 
+                errores.add("Error sintáctico al FILTRAR las condiciones cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+                :}
                 ;
 
 condicion ::= operacion_relacional operador_logico condicion
@@ -140,14 +161,18 @@ condicion ::= operacion_relacional operador_logico condicion
            
 
 operacion_relacional ::= NOMBRECOLUMNA:c operador_relacional:o literal:li {:
-    
-    
     condiciones.add(new Columna(c, o , li)); 
 :}
+| error {: 
+        errores.add("Error sintáctico en la operacion relacional cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    :}
                     ;
 
 literal ::= LITERAL:l {:RESULT = l; :}
             | NUMBER:n {:RESULT = n; :}
+            | error {: 
+            errores.add("Error sintáctico en la literal : " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    :}
             ;
 
 operador_relacional ::= SIMB_IGUAL:igual {:RESULT = "=";:}
@@ -156,10 +181,16 @@ operador_relacional ::= SIMB_IGUAL:igual {:RESULT = "=";:}
                    | SIMB_MENOR_IGUAL:meigual {:RESULT = "<=";:}
                    | SIMB_MAYOR_IGUAL:maigual {:RESULT = ">=";:}
                    | SIMB_NO_IGUAL:noigual {:RESULT = "<>";:}
+| error {: 
+        errores.add("Error sintáctico en el operador relacional cerca de: "+ cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    :}
                    ;
 
 operador_logico ::= OP_AND {: operadoresLogicos.add("AND"); :}
                 | OP_OR {: operadoresLogicos.add("OR"); :}
+                | error {: 
+                errores.add("Error sintáctico en el operador logico cerca de: " + cur_token.value+ " fila: "+cur_token.left + " columna: " + cur_token.right);
+    :}
                 ;
 
-empty ::= /* empty */ {: System.out.println("no se encontro nada"); :} ;
+empty ::= /* empty */ ;

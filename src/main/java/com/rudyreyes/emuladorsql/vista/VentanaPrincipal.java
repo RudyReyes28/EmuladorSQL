@@ -8,6 +8,7 @@ import com.rudyreyes.emuladorsql.modelo.InstruccionActualizar;
 import com.rudyreyes.emuladorsql.modelo.InstruccionEliminar;
 import com.rudyreyes.emuladorsql.modelo.InstruccionInsertar;
 import com.rudyreyes.emuladorsql.modelo.InstruccionSeleccionar;
+import com.rudyreyes.emuladorsql.modelo.archivos.Archivo;
 import com.rudyreyes.emuladorsql.modelo.archivos.Proyecto;
 import com.rudyreyes.emuladorsql.modelo.archivos.util.CrearArchivos;
 import com.rudyreyes.emuladorsql.vista.util.ActualizarFilasTablas;
@@ -60,6 +61,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tooltipArbol();
         crearArchivos();
         verArchivos();
+        cerrarPestanias();
         setLocationRelativeTo(null);
     }
 
@@ -215,6 +217,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
     }
     
+    private void imprimirPathArchivos(){
+        String ar = "";
+        for(Archivo archivo: proyecto.getArchivos()){
+            ar += "<ARCHIVO nombre= \""+archivo.getNombreArchivo() + "\" ubicacion= \""+archivo.getPathArchivo()+"\" />\n" ;
+        }
+        
+        areaLecturaArchivos.setText(ar);
+    }
+    
     private void verArchivos(){
         arbolProyecto.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -233,6 +244,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 
                                 seccionArchivos.addTab(nodoSeleccionado.getNombre(), new JScrollPane(areaContenido));
                             }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    private void cerrarPestanias(){
+        seccionArchivos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON3) { // Clic derecho
+                    int tabIndex = seccionArchivos.indexAtLocation(e.getX(), e.getY());
+                    if (tabIndex >= 0) {
+                        // Obtener el nombre de la pestaña
+                        String nombrePestana = seccionArchivos.getTitleAt(tabIndex);
+
+                        // Puedes mostrar un diálogo de confirmación aquí antes de cerrar la pestaña
+                        int respuesta = JOptionPane.showConfirmDialog(null,
+                                "¿Cerrar la pestania '" + nombrePestana + "'?", "Confirmación",
+                                JOptionPane.YES_NO_OPTION);
+                        if (respuesta == JOptionPane.YES_OPTION) {
+                            seccionArchivos.removeTabAt(tabIndex);
                         }
                     }
                 }
@@ -301,6 +335,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         if (creado) {
                             NodoDirectorio nuevoNodo = new NodoDirectorio(nombreArchivo, pathArchivo);
                             nodoSeleccion.add(nuevoNodo);
+                            imprimirPathArchivos();
 
                             modeloArbol.reload();
                         }
@@ -345,6 +380,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nuevoProyectoActionPerformed
 
+    private void imprimirErrores(ArrayList<String> errores){
+        for(String error: errores){
+            areaConsola.append(error+"\n");
+        }
+    }
+    
     private void mostrarConsultasSeleccionar(String datosCSV,InstruccionSeleccionar seleccion ){
         
         JScrollPane scroll = MostrarConsultasSeleccionar.mostrarTablasSeleccionar(datosCSV, seleccion,areaConsola);
@@ -375,6 +416,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 try {
                     Symbol symbol = parser.parse();
                     ArrayList<Object> consultas = new ArrayList<>(parser.obtenerConsultas());
+                    ArrayList<String> errores = new ArrayList<>(parser.obtenerErrores());
                     //C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv
                     for (Object objetos : consultas) {
                         if (objetos instanceof InstruccionSeleccionar) {
@@ -426,6 +468,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             System.out.println("No es instancia");
                         }
                     }
+                    //Mandar a imprimir errores
+                    imprimirErrores(errores);
 
                 } catch (Exception e) {
                     // Manejar excepciones si ocurren durante el análisis
