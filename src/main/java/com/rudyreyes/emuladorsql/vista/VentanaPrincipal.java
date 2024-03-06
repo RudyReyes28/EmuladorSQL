@@ -18,6 +18,7 @@ import com.rudyreyes.emuladorsql.vista.util.MiModeloTabla;
 import com.rudyreyes.emuladorsql.vista.util.MostrarConsultasSeleccionar;
 import com.rudyreyes.emuladorsql.vista.util.NodoDirectorio;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +30,9 @@ import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java_cup.runtime.Symbol;
 import javax.swing.JDialog;
 import javax.swing.JMenuItem;
@@ -48,6 +51,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     Proyecto proyecto;
     private DefaultMutableTreeNode nodoProyecto;
     private DefaultTreeModel modeloArbol;
+    private Map<Component, Archivo> mapaPestanas = new HashMap<>();
 
     /**
      * Creates new form VentanaPrincipal
@@ -241,8 +245,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 String rutaArchivo = nodoSeleccionado.getUbicacion();
                                 String contenidoArchivo = CrearArchivos.obtenerContenidoArchivo(rutaArchivo);
                                 JTextArea areaContenido = new JTextArea(contenidoArchivo);
+                                Archivo datos = new Archivo(nodoSeleccionado.getNombre(), rutaArchivo);
                                 
                                 seccionArchivos.addTab(nodoSeleccionado.getNombre(), new JScrollPane(areaContenido));
+                                mapaPestanas.put(seccionArchivos.getComponentAt(seccionArchivos.getTabCount() - 1), datos);
                             }
                         }
                     }
@@ -255,19 +261,41 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         seccionArchivos.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON3) { // Clic derecho
+                if (e.getButton() == MouseEvent.BUTTON3 && e.getClickCount() == 1 ) { // Clic derecho
                     int tabIndex = seccionArchivos.indexAtLocation(e.getX(), e.getY());
                     if (tabIndex >= 0) {
                         // Obtener el nombre de la pestaña
                         String nombrePestana = seccionArchivos.getTitleAt(tabIndex);
+                        Component tabComponent = seccionArchivos.getComponentAt(tabIndex);
+                        Archivo archivoInfo = mapaPestanas.get(tabComponent);
+                    
+                        
+                            if (tabComponent instanceof JScrollPane) {
+                                JScrollPane scrollPane = (JScrollPane) tabComponent;
+                                JTextArea areaContenido = (JTextArea) scrollPane.getViewport().getView();
 
-                        // Puedes mostrar un diálogo de confirmación aquí antes de cerrar la pestaña
-                        int respuesta = JOptionPane.showConfirmDialog(null,
-                                "¿Cerrar la pestania '" + nombrePestana + "'?", "Confirmación",
-                                JOptionPane.YES_NO_OPTION);
-                        if (respuesta == JOptionPane.YES_OPTION) {
-                            seccionArchivos.removeTabAt(tabIndex);
+                                // Obtener el texto del JTextArea
+                                String textoContenido = areaContenido.getText();
+                                
+                                
+
+                            //AQUI DEBERIA DE GUARDAR LA INFOR
+                            int guadarDatos = JOptionPane.showConfirmDialog(null,
+                                    "¿Guardar los datos antes de cerrar '" + nombrePestana + "'?", "Guardar Datos",
+                                    JOptionPane.YES_NO_OPTION);
+                            if (guadarDatos == JOptionPane.YES_OPTION) {
+                                //GUARDAR ARCHIVOS
+                                boolean realizado =CrearArchivos.actualizarArchivo(archivoInfo.getPathArchivo(), textoContenido);
+                                if(realizado){
+                                    JOptionPane.showMessageDialog(null, "Se guardo correctamente");
+                                }
+                                
+                                seccionArchivos.removeTabAt(tabIndex);
+                            } else {
+                                seccionArchivos.removeTabAt(tabIndex);
+                            }
                         }
+
                     }
                 }
             }
