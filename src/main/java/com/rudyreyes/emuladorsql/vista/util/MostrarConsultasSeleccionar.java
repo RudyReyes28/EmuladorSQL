@@ -140,7 +140,9 @@ public class MostrarConsultasSeleccionar {
 
         
         for (int j = 0; j < columnas.length; j++) {
-            if (columnas[j].equals(columnaSeleccionada)) {
+             String columnaSinEspacios = columnas[j].trim();
+
+            if (columnaSinEspacios.equals(columnaSeleccionada)) {
                 // Agregar la posición al filtroColumnas
                 filtroColumnas.add(j);
                 break; // Salir del bucle interno una vez encontrada la columna

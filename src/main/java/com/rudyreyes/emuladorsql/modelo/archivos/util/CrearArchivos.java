@@ -92,4 +92,18 @@ public class CrearArchivos {
         }
         return realizado;
     }
+    
+    public static boolean actualizarArchivo(String rutaAbsoluta, String contenidoCSV){
+        boolean realizado = false;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaAbsoluta))) {
+            // Sobrescribir el contenido del archivo con el nuevo contenido CSV
+            writer.write(contenidoCSV);
+            realizado = true;
+        } catch (IOException e) {
+            //e.printStackTrace();  // Manejo básico de excepciones
+            System.out.println("Error al actualizar");
+        }
+        
+        return realizado;
+    }
 }

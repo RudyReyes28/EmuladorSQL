@@ -10,6 +10,7 @@ import com.rudyreyes.emuladorsql.modelo.InstruccionInsertar;
 import com.rudyreyes.emuladorsql.modelo.InstruccionSeleccionar;
 import com.rudyreyes.emuladorsql.modelo.archivos.Proyecto;
 import com.rudyreyes.emuladorsql.modelo.archivos.util.CrearArchivos;
+import com.rudyreyes.emuladorsql.vista.util.ActualizarFilasTablas;
 import com.rudyreyes.emuladorsql.vista.util.InsertarFilasTabla;
 import com.rudyreyes.emuladorsql.vista.util.MiModeloTabla;
 import com.rudyreyes.emuladorsql.vista.util.MostrarConsultasSeleccionar;
@@ -389,7 +390,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         } else if (objetos instanceof InstruccionInsertar) {
                             InstruccionInsertar insertar = (InstruccionInsertar) objetos;
                             if (insertar != null) {
-                                insertar.mostrarDatos();
+                                //insertar.mostrarDatos();
                                 
                                 String path = insertar.getPath().replace("\"", "");
                                 String extraerArchivo = CrearArchivos.obtenerContenidoArchivo(path);
@@ -402,8 +403,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         } else if (objetos instanceof InstruccionActualizar) {
                             InstruccionActualizar actualizar = (InstruccionActualizar) objetos;
                             if (actualizar != null) {
-                                System.out.println("\nConsultas para actualizar: ");
-                                actualizar.mostrarDatos();
+                                
+                                //actualizar.mostrarDatos();
+                                String path = actualizar.getPath().replace("\"", "");
+                                String extraerArchivo = CrearArchivos.obtenerContenidoArchivo(path);
+                                ActualizarFilasTablas.actualizarFilasTablas(extraerArchivo, actualizar, areaConsola);
+                                //ACTUALIZAR EN "C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv" ASIGNAR Nombre = "Juan", Edad = 30;
                             }
 
                         } else if (objetos instanceof InstruccionEliminar) {
