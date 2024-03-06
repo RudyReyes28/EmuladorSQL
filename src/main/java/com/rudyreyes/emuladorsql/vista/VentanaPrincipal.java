@@ -10,6 +10,7 @@ import com.rudyreyes.emuladorsql.modelo.InstruccionInsertar;
 import com.rudyreyes.emuladorsql.modelo.InstruccionSeleccionar;
 import com.rudyreyes.emuladorsql.modelo.archivos.Proyecto;
 import com.rudyreyes.emuladorsql.modelo.archivos.util.CrearArchivos;
+import com.rudyreyes.emuladorsql.vista.util.InsertarFilasTabla;
 import com.rudyreyes.emuladorsql.vista.util.MiModeloTabla;
 import com.rudyreyes.emuladorsql.vista.util.MostrarConsultasSeleccionar;
 import com.rudyreyes.emuladorsql.vista.util.NodoDirectorio;
@@ -343,42 +344,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_nuevoProyectoActionPerformed
 
     private void mostrarConsultasSeleccionar(String datosCSV,InstruccionSeleccionar seleccion ){
-        /*
-        String[] lineas = datosCSV.split("\n");
-
-        // Obtener nombres de columnas
-        String[] columnas = lineas[0].split(",");
-
-        // Obtener datos
-        List<Object[]> datosList = new ArrayList<>();
-
-        for (int i = 1; i < lineas.length; i++) {
-            String[] valores = lineas[i].split(",");
-            datosList.add(valores);
-        }
-
-        // Convertir List<Object[]> a Object[][]
-        Object[][] datos = new Object[datosList.size()][columnas.length];
-        for (int i = 0; i < datosList.size(); i++) {
-            datos[i] = datosList.get(i);
-        }
         
-        // Crear el modelo de tabla
-        MiModeloTabla modeloTabla = new MiModeloTabla( columnas,datos);
-
-        // Crear la tabla
-        JTable tabla = new JTable(modeloTabla);
-        // Crear el JScrollPane con la tabla
-        if (seleccion.getSeleccionarTodo().equals("*")) {
-            JScrollPane scrollPane = new JScrollPane(tabla);
-            JDialog dialog = new JDialog((Frame) null, "Tabla desde CSV", true);
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dialog.setLayout(new BorderLayout());
-            dialog.add(scrollPane, BorderLayout.CENTER);
-            dialog.setSize(400, 300);
-            dialog.setLocationRelativeTo(null);
-            dialog.setVisible(true);
-        }*/
         JScrollPane scroll = MostrarConsultasSeleccionar.mostrarTablasSeleccionar(datosCSV, seleccion,areaConsola);
         
         if(scroll == null){
@@ -412,8 +378,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         if (objetos instanceof InstruccionSeleccionar) {
                             InstruccionSeleccionar seleccion = (InstruccionSeleccionar) objetos;
                             if (seleccion != null) {
-                                //System.out.println("\nConsultas para seleccionar :");
-                                seleccion.imprimirDatos();
+                                //seleccion.imprimirDatos();
                                 String path = seleccion.getPath().replace("\"", "");
                                 String extraerArchivo = CrearArchivos.obtenerContenidoArchivo(path);
                                 mostrarConsultasSeleccionar(extraerArchivo, seleccion);
@@ -424,8 +389,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         } else if (objetos instanceof InstruccionInsertar) {
                             InstruccionInsertar insertar = (InstruccionInsertar) objetos;
                             if (insertar != null) {
-                                System.out.println("\nConsultas para insertar: ");
                                 insertar.mostrarDatos();
+                                
+                                String path = insertar.getPath().replace("\"", "");
+                                String extraerArchivo = CrearArchivos.obtenerContenidoArchivo(path);
+                                
+                                InsertarFilasTabla.insertarFilasTabla(extraerArchivo, insertar, areaConsola);
+                                //SELECCIONAR * EN "C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv" FILTRAR Salario>10;
+                                //INSERTAR EN "C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv" (Nombre,Edad) VALORES ("Emerson",28);
                             }
 
                         } else if (objetos instanceof InstruccionActualizar) {

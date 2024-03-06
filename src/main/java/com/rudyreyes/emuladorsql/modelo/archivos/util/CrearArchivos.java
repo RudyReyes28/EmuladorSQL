@@ -4,7 +4,9 @@
  */
 package com.rudyreyes.emuladorsql.modelo.archivos.util;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -73,5 +75,21 @@ public class CrearArchivos {
             JOptionPane.showMessageDialog(null,"No se pudo leer el archivo");
         }
         return contenido;
+    }
+    
+    public static boolean insertarContenidoArchivo(String rutaAbsoluta, String contenidoCSV){
+        boolean realizado = false;
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaAbsoluta, true))) {
+            // Escribir la fila CSV en el archivo
+            writer.newLine(); // Agregar una nueva línea para la siguiente entrada
+            writer.write(contenidoCSV);
+           
+            realizado = true;
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.println("Error al insertar");
+        }
+        return realizado;
     }
 }
