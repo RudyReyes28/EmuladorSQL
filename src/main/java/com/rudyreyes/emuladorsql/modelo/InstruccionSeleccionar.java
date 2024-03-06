@@ -108,10 +108,12 @@ public class InstruccionSeleccionar {
         
         System.out.println("Direccion: "+this.path);
         System.out.println("\nCondiciones si hay: ");
-        if(condiciones!=null){
+        if(condiciones!=null && !condiciones.isEmpty()){
             for(Columna condicion: condiciones){
                 System.out.println("Columna: "+condicion.getColumna()+" "+condicion.getOperador()+" "+condicion.getValor());
             }
+        }else{
+            System.out.println("No hay condiciones");
         }
         
         System.out.println("Operadores logicos: ");

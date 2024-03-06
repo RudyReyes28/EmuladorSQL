@@ -379,7 +379,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             dialog.setLocationRelativeTo(null);
             dialog.setVisible(true);
         }*/
-        JScrollPane scroll = MostrarConsultasSeleccionar.mostrarTablasSeleccionar(datosCSV, seleccion);
+        JScrollPane scroll = MostrarConsultasSeleccionar.mostrarTablasSeleccionar(datosCSV, seleccion,areaConsola);
         
         if(scroll == null){
             System.out.println("Es null");
@@ -400,56 +400,57 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             // Verificar si la consulta está completa al detectar un punto y coma
             String query = areaConsultas.getText().trim();
             if (query.endsWith(";")) {
+                areaConsola.setText("");
                 LexerSQL lexer = new LexerSQL(new StringReader(query));
                 ParserSQL parser = new ParserSQL(lexer);
-        
-        
-        try {
-            Symbol symbol = parser.parse();
-            ArrayList<Object> consultas = new ArrayList<>(parser.obtenerConsultas());
-            //C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv
-            for(Object objetos: consultas){
-                if (objetos instanceof InstruccionSeleccionar) {
-                    InstruccionSeleccionar seleccion = (InstruccionSeleccionar) objetos;
-                    if (seleccion != null) {
-                        //System.out.println("\nConsultas para seleccionar :");
-                        seleccion.imprimirDatos();
-                        String path = seleccion.getPath().replace("\"", "");
-                        String extraerArchivo =CrearArchivos.obtenerContenidoArchivo(path);
-                        mostrarConsultasSeleccionar(extraerArchivo, seleccion);
-                        
-                        //SELECCIONAR columna1 , columna2 EN "C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv" FILTRAR columna1 = "hola" AND columna2 = 5 AND columna2 > 5;
-                    }
-                } else if (objetos instanceof InstruccionInsertar) {
-                    InstruccionInsertar insertar = (InstruccionInsertar) objetos;
-                    if (insertar != null) {
-                        System.out.println("\nConsultas para insertar: ");
-                        insertar.mostrarDatos();
+
+                try {
+                    Symbol symbol = parser.parse();
+                    ArrayList<Object> consultas = new ArrayList<>(parser.obtenerConsultas());
+                    //C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv
+                    for (Object objetos : consultas) {
+                        if (objetos instanceof InstruccionSeleccionar) {
+                            InstruccionSeleccionar seleccion = (InstruccionSeleccionar) objetos;
+                            if (seleccion != null) {
+                                //System.out.println("\nConsultas para seleccionar :");
+                                seleccion.imprimirDatos();
+                                String path = seleccion.getPath().replace("\"", "");
+                                String extraerArchivo = CrearArchivos.obtenerContenidoArchivo(path);
+                                mostrarConsultasSeleccionar(extraerArchivo, seleccion);
+
+                                //SELECCIONAR columna1 , columna2 EN "C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv" FILTRAR columna1 = "hola" AND columna2 = 5 AND columna2 > 5;
+                                //SELECCIONAR * EN "C:\Users\rudyo\OneDrive\Escritorio\proyecto1\archivo1.csv" FILTRAR Salario>10;
+                            }
+                        } else if (objetos instanceof InstruccionInsertar) {
+                            InstruccionInsertar insertar = (InstruccionInsertar) objetos;
+                            if (insertar != null) {
+                                System.out.println("\nConsultas para insertar: ");
+                                insertar.mostrarDatos();
+                            }
+
+                        } else if (objetos instanceof InstruccionActualizar) {
+                            InstruccionActualizar actualizar = (InstruccionActualizar) objetos;
+                            if (actualizar != null) {
+                                System.out.println("\nConsultas para actualizar: ");
+                                actualizar.mostrarDatos();
+                            }
+
+                        } else if (objetos instanceof InstruccionEliminar) {
+                            InstruccionEliminar eliminar = (InstruccionEliminar) objetos;
+                            if (eliminar != null) {
+                                System.out.println("\nConsultas para Eliminar: ");
+                                eliminar.mostrarDatos();
+                            }
+
+                        } else {
+                            System.out.println("No es instancia");
+                        }
                     }
 
-                } else if (objetos instanceof InstruccionActualizar) {
-                    InstruccionActualizar actualizar = (InstruccionActualizar) objetos;
-                    if (actualizar != null) {
-                        System.out.println("\nConsultas para actualizar: ");
-                        actualizar.mostrarDatos();
-                    }
-
-                } else if (objetos instanceof InstruccionEliminar) {
-                    InstruccionEliminar eliminar = (InstruccionEliminar) objetos;
-                    if (eliminar != null) {
-                        System.out.println("\nConsultas para Eliminar: ");
-                        eliminar.mostrarDatos();
-                    }
-
-                } else {
-                    System.out.println("No es instancia");
+                } catch (Exception e) {
+                    // Manejar excepciones si ocurren durante el análisis
+                    e.printStackTrace();
                 }
-            }
-            
-        } catch (Exception e) {
-            // Manejar excepciones si ocurren durante el análisis
-            e.printStackTrace();
-        }
             }
         }
 
